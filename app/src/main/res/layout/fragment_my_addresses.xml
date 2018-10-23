@@ -6,7 +6,8 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/fragment_my_addresses_parent_cl"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/image_background2">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/fragment_my_addresses_parent_rv"
@@ -26,5 +27,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fragment_my_addresses_parent_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_margin="@dimen/fab_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@android:drawable/ic_input_add" />
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -4,13 +4,15 @@ package com.nurdcoder.android.icr_wallet.data.local.transactions;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ApiResponse implements Parcelable {
 
@@ -29,13 +31,11 @@ public class ApiResponse implements Parcelable {
 
     /**
      * No args constructor for use in serialization
-     * 
      */
     public ApiResponse() {
     }
 
     /**
-     * 
      * @param message
      * @param transactions
      * @param token
@@ -124,7 +124,7 @@ public class ApiResponse implements Parcelable {
         this.message = in.readString();
     }
 
-    public static final Parcelable.Creator<ApiResponse> CREATOR = new Parcelable.Creator<ApiResponse>() {
+    public static final Creator<ApiResponse> CREATOR = new Creator<ApiResponse>() {
         @Override
         public ApiResponse createFromParcel(Parcel source) {
             return new ApiResponse(source);

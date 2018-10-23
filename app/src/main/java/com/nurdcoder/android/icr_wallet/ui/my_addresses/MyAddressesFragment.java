@@ -1,18 +1,23 @@
 package com.nurdcoder.android.icr_wallet.ui.my_addresses;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.nurdcoder.android.icr_wallet.R;
 import com.nurdcoder.android.icr_wallet.data.helper.Constants;
 import com.nurdcoder.android.icr_wallet.data.helper.keys.PreferenceKey;
-import com.nurdcoder.android.icr_wallet.data.local.my_addresses.ApiResponse;
 import com.nurdcoder.android.icr_wallet.data.local.my_addresses.Address;
+import com.nurdcoder.android.icr_wallet.data.local.my_addresses.ApiResponse;
 import com.nurdcoder.android.icr_wallet.databinding.FragmentMyAddressesBinding;
+import com.nurdcoder.android.icr_wallet.ui.ae_address.AEAddressActivity;
 import com.nurdcoder.android.icr_wallet.ui.base.BaseFragment;
 import com.nurdcoder.android.util.helper.CustomRecyclerItemSpaceDecoration;
 import com.nurdcoder.android.util.helper.ScreenUtils;
@@ -84,6 +89,42 @@ public class MyAddressesFragment extends BaseFragment<MyAddressesMvpView, MyAddr
             }
         });
 
+        mBinding.fragmentMyAddressesParentRv.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            GestureDetector gestureDetector = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+                    return true;
+                }
+            });
+
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+
+                View child = rv.findChildViewUnder(e.getX(), e.getY());
+                if (child != null && gestureDetector.onTouchEvent(e)) {
+                    int position = rv.getChildAdapterPosition(child);
+                    Intent intent = new Intent(getContext(), AEAddressActivity.class);
+                    intent.putExtra(AEAddressActivity.EXTRA_TYPE, Constants.Integer.ONE);
+                    intent.putExtra(AEAddressActivity.EXTRA_POSITION, position);
+                    intent.putExtra(AEAddressActivity.EXTRA_DATA, mDataList.get(position));
+                    startActivityForResult(intent, Constants.Integer.ONE);
+                    Objects.requireNonNull(getActivity()).overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+                }
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
+
+        setClickListener(mBinding.fragmentMyAddressesParentFab);
         new Handler(Objects.requireNonNull(getActivity()).getMainLooper()).postDelayed(() -> presenter.getMyAddresses(), Constants.Integer.API_DELAY);
     }
 
@@ -98,14 +139,53 @@ public class MyAddressesFragment extends BaseFragment<MyAddressesMvpView, MyAddr
     }
 
     @Override
+    public void onClick(View view) {
+        super.onClick(view);
+
+        switch (view.getId()) {
+            case R.id.fragment_my_addresses_parent_fab:
+                Intent intent = new Intent(getContext(), AEAddressActivity.class);
+                intent.putExtra(AEAddressActivity.EXTRA_TYPE, Constants.Integer.ZERO);
+                startActivityForResult(intent, Constants.Integer.ZERO);
+                Objects.requireNonNull(getActivity()).overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            Address address = Objects.requireNonNull(data.getExtras()).getParcelable(AEAddressActivity.EXTRA_DATA);
+            switch (requestCode) {
+                case Constants.Integer.ZERO:
+                    mDataList.add(address);
+                    mAdapter.notifyDataSetChanged();
+                    if (mDataList.size() == Constants.Integer.ONE) {
+                        mBinding.fragmentMyAddressesParentRv.setVisibility(View.VISIBLE);
+                        mBinding.fragmentMyAddressesParentPwt.layoutProgressWithTextTv.setVisibility(View.GONE);
+                    }
+                    break;
+                case Constants.Integer.ONE:
+                    int position = data.getExtras().getInt(AEAddressActivity.EXTRA_POSITION);
+                    mDataList.remove(position);
+                    mDataList.add(position, address);
+                    mAdapter.notifyDataSetChanged();
+                    break;
+            }
+        }
+    }
+
+    @Override
     protected MyAddressesPresenter initPresenter() {
         return new MyAddressesPresenter();
     }
 
     @Override
     public void onMyAddressesLoadedSuccessful(ApiResponse apiResponse) {
-        SharedPreferencesManager.setStringSetting(getContext(),PreferenceKey.KEY_USER_TOKEN,apiResponse.getToken());
+        SharedPreferencesManager.setStringSetting(getContext(), PreferenceKey.KEY_USER_TOKEN, apiResponse.getToken());
         mBinding.fragmentMyAddressesParentPwt.layoutProgressWithTextPb.setVisibility(View.GONE);
+        mBinding.fragmentMyAddressesParentFab.setVisibility(View.VISIBLE);
         if (apiResponse.getAddress().size() > 0) {
             mBinding.fragmentMyAddressesParentRv.setVisibility(View.VISIBLE);
             mDataList.addAll(apiResponse.getAddress());

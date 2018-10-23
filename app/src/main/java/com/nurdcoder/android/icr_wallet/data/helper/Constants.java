@@ -8,6 +8,8 @@ public interface Constants {
     String KEY_PICTURE = "profilePic";
 
     interface Integer {
+        int ZERO = 0;
+        int ONE = 1;
         int API_DELAY = 500;
         int SOCKET_TIMEOUT_MS = 3000;
     }

@@ -1,5 +1,8 @@
 package com.nurdcoder.android.icr_wallet.data.local.balance;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -7,7 +10,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class ApiResponse {
+public class ApiResponse implements Parcelable {
 
     @SerializedName("token")
     @Expose
@@ -83,4 +86,33 @@ public class ApiResponse {
         return new EqualsBuilder().append(message, rhs.message).append(balance, rhs.balance).append(token, rhs.token).isEquals();
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.token);
+        dest.writeLong(this.balance);
+        dest.writeString(this.message);
+    }
+
+    protected ApiResponse(Parcel in) {
+        this.token = in.readString();
+        this.balance = in.readLong();
+        this.message = in.readString();
+    }
+
+    public static final Parcelable.Creator<ApiResponse> CREATOR = new Parcelable.Creator<ApiResponse>() {
+        @Override
+        public ApiResponse createFromParcel(Parcel source) {
+            return new ApiResponse(source);
+        }
+
+        @Override
+        public ApiResponse[] newArray(int size) {
+            return new ApiResponse[size];
+        }
+    };
 }

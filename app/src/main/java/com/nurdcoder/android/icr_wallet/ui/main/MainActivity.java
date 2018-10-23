@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -17,18 +16,14 @@ import android.widget.TextView;
 
 import com.nurdcoder.android.icr_wallet.R;
 import com.nurdcoder.android.icr_wallet.data.helper.keys.PreferenceKey;
-import com.nurdcoder.android.icr_wallet.data.local.event.OpenDrawerEvent;
 import com.nurdcoder.android.icr_wallet.databinding.ActivityMainBinding;
 import com.nurdcoder.android.icr_wallet.ui.base.BaseActivity;
 import com.nurdcoder.android.icr_wallet.ui.home.HomeFragment;
 import com.nurdcoder.android.icr_wallet.ui.my_addresses.MyAddressesFragment;
-import com.nurdcoder.android.icr_wallet.ui.transaction.TransactionsFragment;
+import com.nurdcoder.android.icr_wallet.ui.transactions.TransactionsFragment;
 import com.nurdcoder.android.util.helper.BarUtil;
 import com.nurdcoder.android.util.helper.ScreenUtils;
 import com.nurdcoder.android.util.helper.SharedPreferencesManager;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Objects;
 

@@ -1,13 +1,17 @@
 
 package com.nurdcoder.android.icr_wallet.data.local.my_addresses;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class Address {
+public class Address implements Parcelable {
 
     @SerializedName("address")
     @Expose
@@ -18,13 +22,11 @@ public class Address {
 
     /**
      * No args constructor for use in serialization
-     * 
      */
     public Address() {
     }
 
     /**
-     * 
      * @param address
      * @param label
      */
@@ -72,4 +74,31 @@ public class Address {
         return new EqualsBuilder().append(address, rhs.address).append(label, rhs.label).isEquals();
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.address);
+        dest.writeString(this.label);
+    }
+
+    protected Address(Parcel in) {
+        this.address = in.readString();
+        this.label = in.readString();
+    }
+
+    public static final Parcelable.Creator<Address> CREATOR = new Parcelable.Creator<Address>() {
+        @Override
+        public Address createFromParcel(Parcel source) {
+            return new Address(source);
+        }
+
+        @Override
+        public Address[] newArray(int size) {
+            return new Address[size];
+        }
+    };
 }

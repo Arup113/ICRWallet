@@ -1,13 +1,17 @@
 
 package com.nurdcoder.android.icr_wallet.data.local.transactions;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class Transaction {
+public class Transaction implements Parcelable {
 
     @SerializedName("account")
     @Expose
@@ -45,13 +49,11 @@ public class Transaction {
 
     /**
      * No args constructor for use in serialization
-     * 
      */
     public Transaction() {
     }
 
     /**
-     * 
      * @param amount
      * @param blockindex
      * @param time
@@ -189,4 +191,49 @@ public class Transaction {
         return new EqualsBuilder().append(amount, rhs.amount).append(blockindex, rhs.blockindex).append(time, rhs.time).append(category, rhs.category).append(confirmations, rhs.confirmations).append(timereceived, rhs.timereceived).append(address, rhs.address).append(txid, rhs.txid).append(blockhash, rhs.blockhash).append(account, rhs.account).append(blocktime, rhs.blocktime).isEquals();
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.account);
+        dest.writeString(this.address);
+        dest.writeString(this.category);
+        dest.writeLong(this.amount);
+        dest.writeLong(this.confirmations);
+        dest.writeString(this.blockhash);
+        dest.writeLong(this.blockindex);
+        dest.writeLong(this.blocktime);
+        dest.writeString(this.txid);
+        dest.writeLong(this.time);
+        dest.writeLong(this.timereceived);
+    }
+
+    protected Transaction(Parcel in) {
+        this.account = in.readString();
+        this.address = in.readString();
+        this.category = in.readString();
+        this.amount = in.readLong();
+        this.confirmations = in.readLong();
+        this.blockhash = in.readString();
+        this.blockindex = in.readLong();
+        this.blocktime = in.readLong();
+        this.txid = in.readString();
+        this.time = in.readLong();
+        this.timereceived = in.readLong();
+    }
+
+    public static final Parcelable.Creator<Transaction> CREATOR = new Parcelable.Creator<Transaction>() {
+        @Override
+        public Transaction createFromParcel(Parcel source) {
+            return new Transaction(source);
+        }
+
+        @Override
+        public Transaction[] newArray(int size) {
+            return new Transaction[size];
+        }
+    };
 }

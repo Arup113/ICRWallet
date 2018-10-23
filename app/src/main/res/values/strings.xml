@@ -80,4 +80,8 @@
     <string name="transactions_failed">Failed to fetch Transactions data.</string>
     <string name="transactions_empty">There is no Transactions data available.</string>
     <string name="balance_failed">Failed to fetch Balance data.</string>
+    <string name="add_address_header">Create Label for New Address</string>
+    <string name="edit_address_header">Edit Label for Existing Address</string>
+    <string name="Label">Label</string>
+    <string name="address">Address</string>
 </resources>

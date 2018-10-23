@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        tools:background="@drawable/image_background">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/size_25dp">
+
+            <ImageButton
+                android:id="@+id/ib_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_8dp"
+                android:layout_marginLeft="@dimen/size_8dp"
+                android:layout_marginTop="@dimen/size_8dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/this_is_back_image_button"
+                android:padding="@dimen/size_5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_arrow_back_ash" />
+
+            <ImageView
+                android:layout_width="@dimen/size_30dp"
+                android:layout_height="@dimen/size_30dp"
+                android:layout_marginStart="@dimen/size_8dp"
+                android:layout_marginLeft="@dimen/size_8dp"
+                android:layout_marginTop="@dimen/size_12dp"
+                android:layout_marginEnd="@dimen/size_8dp"
+                android:layout_marginRight="@dimen/size_8dp"
+                android:rotation="3"
+                android:src="@drawable/ic_triangle"
+                app:layout_constraintEnd_toEndOf="@+id/card_sign_in"
+                app:layout_constraintHorizontal_bias="0.318"
+                app:layout_constraintStart_toStartOf="@+id/card_sign_in"
+                app:layout_constraintTop_toTopOf="@+id/card_sign_in" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_sign_in"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/size_15dp"
+                app:cardElevation="@dimen/size_20dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_verify">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/size_15dp">
+
+                    <EditText
+                        android:id="@+id/edit_text_label"
+                        style="@style/EditTextDefault"
+                        android:layout_width="@dimen/size_0dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/Label"
+                        android:inputType="textPersonName"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/edit_text_address"
+                        style="@style/EditTextDefault"
+                        android:layout_width="@dimen/size_0dp"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:hint="@string/address"
+                        android:inputType="text"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/edit_text_label" />
+
+                    <android.support.v7.widget.AppCompatButton
+                        android:id="@+id/button_submit"
+                        style="@style/ButtonRoundBlue"
+                        android:layout_width="@dimen/size_0dp"
+                        android:layout_height="@dimen/size_45dp"
+                        android:layout_marginTop="@dimen/size_15dp"
+                        android:layout_marginBottom="@dimen/size_10dp"
+                        android:text="@string/submit"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/edit_text_address" />
+
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:id="@+id/text_verify"
+                style="@style/TextPageHeader"
+                android:layout_width="@dimen/size_0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_20dp"
+                android:layout_marginLeft="@dimen/size_20dp"
+                android:layout_marginTop="@dimen/size_80dp"
+                android:layout_marginEnd="@dimen/size_20dp"
+                android:layout_marginRight="@dimen/size_20dp"
+                android:gravity="center"
+                android:text="@string/edit_address_header"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ib_back" />
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+</layout>

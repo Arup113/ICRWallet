@@ -6,7 +6,8 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/fragment_home_parent_cl"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/image_background2">
 
         <TextView
             android:id="@+id/fragment_home_balance_tv"
