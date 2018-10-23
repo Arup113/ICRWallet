@@ -20,6 +20,7 @@ import com.nurdcoder.android.icr_wallet.databinding.ActivityMainBinding;
 import com.nurdcoder.android.icr_wallet.ui.base.BaseActivity;
 import com.nurdcoder.android.icr_wallet.ui.home.HomeFragment;
 import com.nurdcoder.android.icr_wallet.ui.my_addresses.MyAddressesFragment;
+import com.nurdcoder.android.icr_wallet.ui.sign_in.SignInActivity;
 import com.nurdcoder.android.icr_wallet.ui.transactions.TransactionsFragment;
 import com.nurdcoder.android.util.helper.BarUtil;
 import com.nurdcoder.android.util.helper.ScreenUtils;
@@ -167,6 +168,9 @@ public class MainActivity extends BaseActivity<MainMvpView, MainPresenter> imple
                 commitFragment(R.id.main_fragment_container, TransactionsFragment.newInstance());
                 break;
             case R.id.nav_log_out:
+                SharedPreferencesManager.setBooleanSetting(this, PreferenceKey.KEY_IS_LOGGED_IN, false);
+                SignInActivity.runActivity(this, "");
+                finish();
                 break;
         }
 
