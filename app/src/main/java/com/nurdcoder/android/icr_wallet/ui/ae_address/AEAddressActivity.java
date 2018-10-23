@@ -6,10 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.nurdcoder.android.icr_wallet.R;
+import com.nurdcoder.android.icr_wallet.data.helper.Constants;
+import com.nurdcoder.android.icr_wallet.data.helper.keys.PreferenceKey;
+import com.nurdcoder.android.icr_wallet.data.local.ae_address.ApiResponse;
+import com.nurdcoder.android.icr_wallet.data.local.my_addresses.Address;
 import com.nurdcoder.android.icr_wallet.databinding.ActivityAeAddressBinding;
 import com.nurdcoder.android.icr_wallet.ui.base.BaseActivity;
-import com.nurdcoder.android.icr_wallet.ui.sign_in.SignInActivity;
 import com.nurdcoder.android.util.helper.KeyboardUtils;
+import com.nurdcoder.android.util.helper.SharedPreferencesManager;
 import com.nurdcoder.android.util.helper.Toaster;
 
 /**
@@ -26,6 +30,9 @@ public class AEAddressActivity extends BaseActivity<AEAddressMVPView, AEAddressP
     public static final String EXTRA_DATA = "EXTRA_DATA";
     public static final String EXTRA_POSITION = "EXTRA_POSITION";
     private ActivityAeAddressBinding mBinding;
+    private int mType;
+    private int mPosition;
+    private Address mData;
 
     /**
      * Start Activity (Pass value as a 2nd Parameter)
@@ -42,7 +49,7 @@ public class AEAddressActivity extends BaseActivity<AEAddressMVPView, AEAddressP
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_email_verification;
+        return R.layout.activity_ae_address;
     }
 
     @Override
@@ -55,10 +62,21 @@ public class AEAddressActivity extends BaseActivity<AEAddressMVPView, AEAddressP
 
     @Override
     protected void startUI() {
-
         mBinding = (ActivityAeAddressBinding) getViewDataBinding();
-
         setClickListener(mBinding.buttonSubmit, mBinding.ibBack);
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            mType = bundle.getInt(EXTRA_TYPE);
+            mPosition = bundle.getInt(EXTRA_POSITION);
+            mData = bundle.getParcelable(EXTRA_DATA);
+        }
+
+        if (mType == Constants.Integer.ONE) {
+            mBinding.editTextAddress.setVisibility(View.VISIBLE);
+            mBinding.editTextLabel.setText(mData.getLabel());
+            mBinding.editTextAddress.setText(mData.getAddress());
+        }
     }
 
     @Override
@@ -82,7 +100,7 @@ public class AEAddressActivity extends BaseActivity<AEAddressMVPView, AEAddressP
         switch (view.getId()) {
             case R.id.button_submit:
                 KeyboardUtils.hideSoftInput(AEAddressActivity.this);
-                presenter.verifyCaptcha(mBinding.editTextLabel.getText().toString());
+                presenter.aeAddress(mType, mData, mBinding.editTextLabel.getText().toString());
                 break;
 
             case R.id.ib_back:
@@ -92,25 +110,19 @@ public class AEAddressActivity extends BaseActivity<AEAddressMVPView, AEAddressP
     }
 
     @Override
-    public void onCaptchaVerified(boolean isSuccess, String message) {
-        if (isSuccess) {
-//            Toaster.success(message);
-            presenter.resetPassword(mBinding.editTextLabel.getText().toString());
-        } else {
-            Toaster.error(this, message);
+    public void onAeAddressSuccessful(ApiResponse apiResponse) {
+        SharedPreferencesManager.setStringSetting(this, PreferenceKey.KEY_USER_TOKEN, apiResponse.getToken());
+        Intent intent = new Intent();
+        intent.putExtra(EXTRA_DATA, new Address(apiResponse.getLabel(), apiResponse.getAddress()));
+        if (mType == Constants.Integer.ONE) {
+            intent.putExtra(EXTRA_POSITION, mPosition);
         }
-
+        setResult(RESULT_OK, intent);
+        onBackPressed();
     }
 
     @Override
-    public void onPasswordResetRequest(boolean success, String message) {
-        if (success) {
-            Toaster.success(this, message);
-            SignInActivity.runActivity(AEAddressActivity.this, null);
-            AEAddressActivity.this.finish();
-
-        } else {
-            Toaster.error(this, message);
-        }
+    public void onAeAddressFailed() {
+        Toaster.error(this, "Operation Failed");
     }
 }

@@ -1,17 +1,18 @@
 package com.nurdcoder.android.icr_wallet.ui.ae_address;
 
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.CommonStatusCodes;
-import com.google.android.gms.safetynet.SafetyNet;
-import com.nurdcoder.android.icr_wallet.R;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.nurdcoder.android.ICRWalletApp;
+import com.nurdcoder.android.icr_wallet.data.helper.Constants;
 import com.nurdcoder.android.icr_wallet.data.helper.keys.Endpoints;
-import com.nurdcoder.android.icr_wallet.data.local.recaptcha.ApiResponse;
-import com.nurdcoder.android.icr_wallet.data.remote.RemoteApi;
-import com.nurdcoder.android.icr_wallet.data.remote.helper.callback.ResetPasswordCallback;
-import com.nurdcoder.android.icr_wallet.data.remote.helper.callback.ResponseCallBack;
+import com.nurdcoder.android.icr_wallet.data.helper.keys.PreferenceKey;
+import com.nurdcoder.android.icr_wallet.data.local.ae_address.ApiResponse;
+import com.nurdcoder.android.icr_wallet.data.local.my_addresses.Address;
 import com.nurdcoder.android.icr_wallet.ui.base.BasePresenter;
-import com.nurdcoder.android.util.helper.CommonUtils;
-import com.nurdcoder.android.util.helper.Toaster;
+import com.nurdcoder.android.util.helper.SharedPreferencesManager;
+import com.nurdcoder.android.util.lib.volley.ObjectRequest;
 
 import java.util.HashMap;
 
@@ -24,86 +25,51 @@ import java.util.HashMap;
  * Copyright (c) 2018, W3 Engineers Ltd. All rights reserved.
  */
 
-public class AEAddressPresenter extends BasePresenter<AEAddressMVPView> implements ResetPasswordCallback, ResponseCallBack {
+public class AEAddressPresenter extends BasePresenter<AEAddressMVPView> {
 
-    /**
-     * Verify captcha
-     *
-     * @param email email
-     */
-    public void verifyCaptcha(String email) {
 
-        if (!CommonUtils.isEmailValid(email)) {
-            getMvpView().onPasswordResetRequest(false, "Email is not valid");
-        } else {
+    public void aeAddress(int mType, Address mData, String s) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put(Endpoints.Keys.TOKEN, SharedPreferencesManager.getStringSetting(getActivity(), PreferenceKey.KEY_USER_TOKEN, ""));
+        if (mType == Constants.Integer.ONE) {
+            params.put(Endpoints.Keys.ADDRESS, mData.getAddress());
 
-            SafetyNet.getClient(getActivity()).verifyWithRecaptcha(getActivity().getString(R.string.google_captcha_key))
-                    .addOnSuccessListener(getActivity(),
-                            response -> {
-                                // Indicates communication with reCAPTCHA service was
-                                // successful.
-                                String userResponseToken = response.getTokenResult();
-                                if (!userResponseToken.isEmpty()) {
-                                    verifyToken(userResponseToken);
-                                } else {
-                                    getMvpView().onPasswordResetRequest(false, getActivity().getString(R.string.captcha_verification_fail));
-                                }
-                            })
-                    .addOnFailureListener(getActivity(), e -> {
-                        if (e instanceof ApiException) {
-                            // An error occurred when communicating with the
-                            // reCAPTCHA service. Refer to the status code to
-                            // handle the error appropriately.
-                            ApiException apiException = (ApiException) e;
-                            int statusCode = apiException.getStatusCode();
+        }
+        params.put(Endpoints.Keys.LABEL, s);
+        HashMap<String, String> headers = new HashMap<>();
 
-                            Toaster.error(getActivity(), "Error: " + CommonStatusCodes
-                                    .getStatusCodeString(statusCode));
-                        } else {
-                            // A different, unknown type of error occurred.
-                            Toaster.error(getActivity(), "Error: " + e.getMessage());
-
-                            getMvpView().onPasswordResetRequest(false, getActivity().getString(R.string.captcha_verification_fail));
+        ObjectRequest<ApiResponse> objectRequest = new ObjectRequest<>(Request.Method.POST, Endpoints.Flags.AE_ADDRESS, headers, params,
+                new Response.Listener<ApiResponse>() {
+                    @Override
+                    public void onResponse(ApiResponse response) {
+                        if (getMvpView() == null) {
+                            return;
                         }
-                    });
 
-        }
+                        if (response == null) {
+                            getMvpView().onAeAddressFailed();
+                        } else {
+                            if (response.getMessage().contains("Update")) {
+                                getMvpView().onAeAddressSuccessful(response);
+                            } else {
+                                getMvpView().onAeAddressFailed();
+                            }
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (getMvpView() == null) {
+                    return;
+                }
+                getMvpView().onAeAddressFailed();
+            }
+        }, ApiResponse.class);
 
-    }
-
-
-    /**
-     * @param email email
-     */
-    public void resetPassword(String email) {
-        RemoteApi.on().resetPassword(email, this);
-    }
-
-
-    @Override
-    public void onResetPasswordRequest(boolean isSuccess, String message) {
-        getMvpView().onPasswordResetRequest(isSuccess, message);
-    }
-
-    /**
-     * Verify token in parse cloud
-     *
-     * @param token token
-     */
-    void verifyToken(String token) {
-        HashMap<String, Object> parameters = new HashMap<>();
-        parameters.put(Endpoints.Keys.TOKEN, token);
-        RemoteApi.on().getRestApiResponse(Endpoints.Flags.RECAPTCHA, ApiResponse.class, parameters, this);
-    }
-
-
-    @Override
-    public <T> void onResponseReceived(Object ts, Class<T> expectedClass, HashMap<String, Object> paramsUsed, boolean isSucees, String message) {
-        if (getMvpView() == null) {
-            return;
-        }
-
-        ApiResponse apiResponse = (ApiResponse) ts;
-        getMvpView().onCaptchaVerified((apiResponse.getResult().getResponse().equals("success")), apiResponse.getResult().getResponse());
+        objectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                Constants.Integer.SOCKET_TIMEOUT_MS,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        ICRWalletApp.getInstance().addToRequestQueue(objectRequest);
     }
 }

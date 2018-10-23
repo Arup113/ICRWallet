@@ -1,5 +1,6 @@
 package com.nurdcoder.android.icr_wallet.ui.ae_address;
 
+import com.nurdcoder.android.icr_wallet.data.local.ae_address.ApiResponse;
 import com.nurdcoder.android.icr_wallet.ui.base.MvpView;
 
 /**
@@ -11,8 +12,7 @@ import com.nurdcoder.android.icr_wallet.ui.base.MvpView;
  * Copyright (c) 2018, W3 Engineers Ltd. All rights reserved.
  */
 public interface AEAddressMVPView extends MvpView {
+    void onAeAddressSuccessful(ApiResponse apiResponse);
 
-    void onCaptchaVerified(boolean isSuccess, String message);
-
-    void onPasswordResetRequest(boolean success, String message);
+    void onAeAddressFailed();
 }

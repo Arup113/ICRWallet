@@ -17,10 +17,13 @@ public interface Endpoints {
         String TRANSACTIONS = Constants.BASE_URL + "gettransactions";
         String MY_ADDRESSES = Constants.BASE_URL + "getaddress";
         String BALANCE = Constants.BASE_URL + "getbalance";
+        String AE_ADDRESS = "putaddresslebel";
     }
 
     interface Keys {
         String TOKEN = "token";
+        String ADDRESS = "address";
+        String LABEL = "label";
     }
 
     interface Values {
