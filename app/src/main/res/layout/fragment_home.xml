@@ -21,7 +21,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias=".45"
+            app:layout_constraintVertical_bias=".15"
             tools:visibility="visible" />
 
         <TextView
@@ -36,7 +36,37 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias=".55"
+            app:layout_constraintVertical_bias=".25"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/fragment_home_key_tv"
+            style="@style/TextH4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/size_10dp"
+            android:text="My Private Key"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias=".45"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/fragment_home_key_iv"
+            android:layout_width="@dimen/size_150dp"
+            android:layout_height="@dimen/size_150dp"
+            android:layout_margin="@dimen/size_10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/image_placeholder_app"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias=".75"
             tools:visibility="visible" />
 
         <include

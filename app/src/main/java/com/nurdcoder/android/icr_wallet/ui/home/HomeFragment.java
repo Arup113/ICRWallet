@@ -81,6 +81,8 @@ public class HomeFragment extends BaseFragment<HomeMvpView, HomePresenter> imple
         mBinding.fragmentHomeParentPwt.layoutProgressWithTextPb.setVisibility(View.GONE);
         mBinding.fragmentHomeBalanceTv.setVisibility(View.VISIBLE);
         mBinding.fragmentHomeBalanceValueTv.setVisibility(View.VISIBLE);
+        mBinding.fragmentHomeKeyTv.setVisibility(View.VISIBLE);
+        mBinding.fragmentHomeKeyIv.setVisibility(View.VISIBLE);
         mBinding.fragmentHomeBalanceValueTv.setText(apiResponse.getBalance() + "");
     }
 
