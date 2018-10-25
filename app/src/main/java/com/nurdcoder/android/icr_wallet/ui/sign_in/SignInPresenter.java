@@ -63,8 +63,8 @@ public class SignInPresenter extends BasePresenter<SignInMvpView> {
                     if (message.contains("Successfull")) {
                         SharedPreferencesManager.setBooleanSetting(getActivity(), PreferenceKey.KEY_IS_LOGGED_IN, true);
                         SharedPreferencesManager.setStringSetting(getActivity(), PreferenceKey.KEY_USER_EMAIL, email);
-//                        SharedPreferencesManager.setStringSetting(getActivity(), PreferenceKey.KEY_USER_NAME, jObj.getString("name"));
-                        ShowLog.e("token",jObj.getString("token"));
+                        SharedPreferencesManager.setStringSetting(getActivity(), PreferenceKey.KEY_USER_NAME, jObj.getString("name"));
+                        ShowLog.e("token", jObj.getString("token"));
                         SharedPreferencesManager.setStringSetting(getActivity(), PreferenceKey.KEY_USER_TOKEN, jObj.getString("token"));
                         getMvpView().onSignIn(true, message);
                     } else {

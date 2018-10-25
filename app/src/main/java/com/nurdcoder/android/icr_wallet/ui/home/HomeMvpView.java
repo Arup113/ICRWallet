@@ -1,6 +1,6 @@
 package com.nurdcoder.android.icr_wallet.ui.home;
 
-import com.nurdcoder.android.icr_wallet.data.local.balance.ApiResponse;
+import com.nurdcoder.android.icr_wallet.data.local.home.ApiResponse;
 import com.nurdcoder.android.icr_wallet.ui.base.MvpView;
 
 /**

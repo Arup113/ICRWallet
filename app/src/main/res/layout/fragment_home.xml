@@ -14,14 +14,13 @@
             style="@style/TextH6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/size_10dp"
             android:text="ICR Balance"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias=".15"
+            app:layout_constraintVertical_bias=".1"
             tools:visibility="visible" />
 
         <TextView
@@ -29,14 +28,12 @@
             style="@style/TextH5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/size_10dp"
             android:text="1.000000"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias=".25"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_home_balance_tv"
+            app:layout_constraintVertical_bias=".2"
             tools:visibility="visible" />
 
         <TextView
@@ -44,29 +41,39 @@
             style="@style/TextH4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/size_10dp"
             android:text="My Private Key"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias=".45"
+            app:layout_constraintVertical_bias=".5"
             tools:visibility="visible" />
 
         <ImageView
             android:id="@+id/fragment_home_key_iv"
             android:layout_width="@dimen/size_150dp"
             android:layout_height="@dimen/size_150dp"
-            android:layout_margin="@dimen/size_10dp"
             android:scaleType="fitXY"
             android:src="@drawable/image_placeholder_app"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias=".75"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_home_key_tv"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/fragment_home_key_value_tv"
+            style="@style/TextH1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Private Key"
+            android:layout_marginLeft="@dimen/size_10dp"
+            android:layout_marginRight="@dimen/size_10dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_home_key_iv"
+            app:layout_constraintStart_toStartOf="parent"
             tools:visibility="visible" />
 
         <include

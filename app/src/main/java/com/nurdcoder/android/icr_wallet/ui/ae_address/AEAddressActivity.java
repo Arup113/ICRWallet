@@ -100,6 +100,7 @@ public class AEAddressActivity extends BaseActivity<AEAddressMVPView, AEAddressP
         switch (view.getId()) {
             case R.id.button_submit:
                 KeyboardUtils.hideSoftInput(AEAddressActivity.this);
+                mBinding.buttonSubmit.setVisibility(View.GONE);
                 presenter.aeAddress(mType, mData, mBinding.editTextLabel.getText().toString());
                 break;
 
@@ -111,9 +112,10 @@ public class AEAddressActivity extends BaseActivity<AEAddressMVPView, AEAddressP
 
     @Override
     public void onAeAddressSuccessful(ApiResponse apiResponse) {
+        mBinding.buttonSubmit.setVisibility(View.VISIBLE);
         SharedPreferencesManager.setStringSetting(this, PreferenceKey.KEY_USER_TOKEN, apiResponse.getToken());
         Intent intent = new Intent();
-        intent.putExtra(EXTRA_DATA, new Address(apiResponse.getLabel(), apiResponse.getAddress()));
+        intent.putExtra(EXTRA_DATA, new Address(apiResponse.getAddress(), apiResponse.getLabel()));
         if (mType == Constants.Integer.ONE) {
             intent.putExtra(EXTRA_POSITION, mPosition);
         }
@@ -123,6 +125,7 @@ public class AEAddressActivity extends BaseActivity<AEAddressMVPView, AEAddressP
 
     @Override
     public void onAeAddressFailed() {
+        mBinding.buttonSubmit.setVisibility(View.VISIBLE);
         Toaster.error(this, "Operation Failed");
     }
 }

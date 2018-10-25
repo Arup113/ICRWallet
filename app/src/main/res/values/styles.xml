@@ -95,6 +95,12 @@
         <item name="android:textColor">@color/ash_dark</item>
     </style>
 
+    <style name="TextH1" parent="@android:style/TextAppearance">
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/circular_std_book</item>
+        <item name="android:textColor">@color/ash_semi_dark</item>
+    </style>
+
     <style name="TextNavItem" parent="@android:style/TextAppearance">
         <item name="android:fontFamily">@font/circular_std_bold</item>
         <item name="android:textColor">@color/selector_nav_item_color</item>

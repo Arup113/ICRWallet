@@ -8,7 +8,7 @@ import android.view.View;
 import com.nurdcoder.android.icr_wallet.R;
 import com.nurdcoder.android.icr_wallet.data.helper.Constants;
 import com.nurdcoder.android.icr_wallet.data.helper.keys.PreferenceKey;
-import com.nurdcoder.android.icr_wallet.data.local.balance.ApiResponse;
+import com.nurdcoder.android.icr_wallet.data.local.home.ApiResponse;
 import com.nurdcoder.android.icr_wallet.databinding.FragmentTransferAmountBinding;
 import com.nurdcoder.android.icr_wallet.ui.base.BaseFragment;
 import com.nurdcoder.android.util.helper.SharedPreferencesManager;

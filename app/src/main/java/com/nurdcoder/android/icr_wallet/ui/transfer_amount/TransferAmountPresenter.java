@@ -8,7 +8,7 @@ import com.nurdcoder.android.ICRWalletApp;
 import com.nurdcoder.android.icr_wallet.data.helper.Constants;
 import com.nurdcoder.android.icr_wallet.data.helper.keys.Endpoints;
 import com.nurdcoder.android.icr_wallet.data.helper.keys.PreferenceKey;
-import com.nurdcoder.android.icr_wallet.data.local.balance.ApiResponse;
+import com.nurdcoder.android.icr_wallet.data.local.home.ApiResponse;
 import com.nurdcoder.android.icr_wallet.ui.base.BasePresenter;
 import com.nurdcoder.android.util.helper.SharedPreferencesManager;
 import com.nurdcoder.android.util.lib.volley.ObjectRequest;
