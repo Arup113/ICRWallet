@@ -77,7 +77,7 @@ public class HomeFragment extends BaseFragment<HomeMvpView, HomePresenter> imple
     }
 
     @Override
-    public void onBalanceLoadedSuccessful(ApiResponse apiResponse) {
+    public void onHomeDataLoadedSuccessful(ApiResponse apiResponse) {
         SharedPreferencesManager.setStringSetting(getContext(), PreferenceKey.KEY_USER_TOKEN, apiResponse.getToken());
         mBinding.fragmentHomeParentPwt.layoutProgressWithTextPb.setVisibility(View.GONE);
 
@@ -94,7 +94,7 @@ public class HomeFragment extends BaseFragment<HomeMvpView, HomePresenter> imple
     }
 
     @Override
-    public void onBalanceLoadedFailed() {
+    public void onHomeDataLoadedFailed() {
         mBinding.fragmentHomeParentPwt.layoutProgressWithTextPb.setVisibility(View.GONE);
         mBinding.fragmentHomeParentPwt.layoutProgressWithTextTv.setVisibility(View.VISIBLE);
         mBinding.fragmentHomeParentPwt.layoutProgressWithTextTv.setText(R.string.balance_failed);

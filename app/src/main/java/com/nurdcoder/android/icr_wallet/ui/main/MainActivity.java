@@ -20,9 +20,9 @@ import com.nurdcoder.android.icr_wallet.databinding.ActivityMainBinding;
 import com.nurdcoder.android.icr_wallet.ui.base.BaseActivity;
 import com.nurdcoder.android.icr_wallet.ui.home.HomeFragment;
 import com.nurdcoder.android.icr_wallet.ui.my_addresses.MyAddressesFragment;
-import com.nurdcoder.android.icr_wallet.ui.send.SendFragment;
 import com.nurdcoder.android.icr_wallet.ui.sign_in.SignInActivity;
 import com.nurdcoder.android.icr_wallet.ui.transactions.TransactionsFragment;
+import com.nurdcoder.android.icr_wallet.ui.transfer_amount.TransferAmountFragment;
 import com.nurdcoder.android.util.helper.BarUtil;
 import com.nurdcoder.android.util.helper.ScreenUtils;
 import com.nurdcoder.android.util.helper.SharedPreferencesManager;
@@ -159,14 +159,11 @@ public class MainActivity extends BaseActivity<MainMvpView, MainPresenter> imple
             case R.id.nav_home:
                 commitFragment(R.id.main_fragment_container, HomeFragment.newInstance());
                 break;
-            case R.id.nav_send:
-                commitFragment(R.id.main_fragment_container, SendFragment.newInstance());
-                break;
             case R.id.nav_my_addresses:
                 commitFragment(R.id.main_fragment_container, MyAddressesFragment.newInstance());
                 break;
             case R.id.nav_transfer_amount:
-                commitFragment(R.id.main_fragment_container, HomeFragment.newInstance());
+                commitFragment(R.id.main_fragment_container, TransferAmountFragment.newInstance());
                 break;
             case R.id.nav_transactions:
                 commitFragment(R.id.main_fragment_container, TransactionsFragment.newInstance());

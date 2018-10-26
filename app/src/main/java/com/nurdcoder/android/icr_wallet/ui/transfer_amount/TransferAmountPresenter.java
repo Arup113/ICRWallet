@@ -51,12 +51,12 @@ public class TransferAmountPresenter extends BasePresenter<TransferAmountMvpView
                         }
 
                         if (response == null) {
-                            getMvpView().onBalanceLoadedFailed();
+                            getMvpView().onTransferAmountFailed();
                         } else {
                             if (response.getMessage().contains("Found")) {
-                                getMvpView().onBalanceLoadedSuccessful(response);
+                                getMvpView().onTransferAmountSuccessful(response);
                             } else {
-                                getMvpView().onBalanceLoadedFailed();
+                                getMvpView().onTransferAmountFailed();
                             }
                         }
                     }
@@ -66,7 +66,7 @@ public class TransferAmountPresenter extends BasePresenter<TransferAmountMvpView
                 if (getMvpView() == null) {
                     return;
                 }
-                getMvpView().onBalanceLoadedFailed();
+                getMvpView().onTransferAmountFailed();
             }
         }, ApiResponse.class);
 

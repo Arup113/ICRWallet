@@ -1,4 +1,4 @@
-package com.nurdcoder.android.icr_wallet.ui.send;
+package com.nurdcoder.android.icr_wallet.ui.transfer_amount;
 
 import android.app.Activity;
 import android.content.Intent;

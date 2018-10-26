@@ -1,8 +1,12 @@
 package com.nurdcoder.android.icr_wallet.ui.transfer_amount;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import com.nurdcoder.android.icr_wallet.R;
@@ -11,6 +15,7 @@ import com.nurdcoder.android.icr_wallet.data.helper.keys.PreferenceKey;
 import com.nurdcoder.android.icr_wallet.data.local.home.ApiResponse;
 import com.nurdcoder.android.icr_wallet.databinding.FragmentTransferAmountBinding;
 import com.nurdcoder.android.icr_wallet.ui.base.BaseFragment;
+import com.nurdcoder.android.util.helper.KeyboardUtils;
 import com.nurdcoder.android.util.helper.SharedPreferencesManager;
 
 import java.util.Objects;
@@ -61,8 +66,41 @@ public class TransferAmountFragment extends BaseFragment<TransferAmountMvpView, 
     }
 
     @Override
-    protected void startUI() {
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.button_sign_in:
+                Intent i = new Intent(getActivity(), ScanActivity.class);
+                startActivityForResult(i, 11);
 
+                break;
+
+            case R.id.button_sign_up:
+                KeyboardUtils.hideSoftInput(getActivity());
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 11) {
+            if (resultCode == Activity.RESULT_OK) {
+                String result = data.getStringExtra("result");
+                Log.e("Data", result);
+                if (!TextUtils.isEmpty(result))
+                    mBinding.editTextEmail.setText(result);
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+    }//onActivityResult
+
+    @Override
+    protected void startUI() {
+        setClickListener(
+                mBinding.buttonSignIn,
+                mBinding.buttonSignUp
+        );
     }
 
     @Override
@@ -76,18 +114,18 @@ public class TransferAmountFragment extends BaseFragment<TransferAmountMvpView, 
     }
 
     @Override
-    public void onBalanceLoadedSuccessful(ApiResponse apiResponse) {
-        SharedPreferencesManager.setStringSetting(getContext(), PreferenceKey.KEY_USER_TOKEN, apiResponse.getToken());
-        mBinding.fragmentTransferAmountParentPwt.layoutProgressWithTextPb.setVisibility(View.GONE);
-        mBinding.fragmentTransferAmountBalanceTv.setVisibility(View.VISIBLE);
-        mBinding.fragmentTransferAmountBalanceValueTv.setVisibility(View.VISIBLE);
-        mBinding.fragmentTransferAmountBalanceValueTv.setText(apiResponse.getBalance() + "");
+    public void onTransferAmountSuccessful(ApiResponse apiResponse) {
+//        SharedPreferencesManager.setStringSetting(getContext(), PreferenceKey.KEY_USER_TOKEN, apiResponse.getToken());
+//        mBinding.fragmentTransferAmountParentPwt.layoutProgressWithTextPb.setVisibility(View.GONE);
+//        mBinding.fragmentTransferAmountBalanceTv.setVisibility(View.VISIBLE);
+//        mBinding.fragmentTransferAmountBalanceValueTv.setVisibility(View.VISIBLE);
+//        mBinding.fragmentTransferAmountBalanceValueTv.setText(apiResponse.getBalance() + "");
     }
 
     @Override
-    public void onBalanceLoadedFailed() {
-        mBinding.fragmentTransferAmountParentPwt.layoutProgressWithTextPb.setVisibility(View.GONE);
-        mBinding.fragmentTransferAmountParentPwt.layoutProgressWithTextTv.setVisibility(View.VISIBLE);
-        mBinding.fragmentTransferAmountParentPwt.layoutProgressWithTextTv.setText(R.string.balance_failed);
+    public void onTransferAmountFailed() {
+//        mBinding.fragmentTransferAmountParentPwt.layoutProgressWithTextPb.setVisibility(View.GONE);
+//        mBinding.fragmentTransferAmountParentPwt.layoutProgressWithTextTv.setVisibility(View.VISIBLE);
+//        mBinding.fragmentTransferAmountParentPwt.layoutProgressWithTextTv.setText(R.string.balance_failed);
     }
 }

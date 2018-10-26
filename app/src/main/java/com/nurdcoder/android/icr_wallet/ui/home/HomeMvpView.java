@@ -24,7 +24,7 @@ import com.nurdcoder.android.icr_wallet.ui.base.MvpView;
  */
 
 public interface HomeMvpView extends MvpView {
-    void onBalanceLoadedSuccessful(ApiResponse apiResponse);
+    void onHomeDataLoadedSuccessful(ApiResponse apiResponse);
 
-    void onBalanceLoadedFailed();
+    void onHomeDataLoadedFailed();
 }

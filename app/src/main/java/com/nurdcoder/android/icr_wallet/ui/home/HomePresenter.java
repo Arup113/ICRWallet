@@ -51,12 +51,12 @@ public class HomePresenter extends BasePresenter<HomeMvpView> {
                         }
 
                         if (response == null) {
-                            getMvpView().onBalanceLoadedFailed();
+                            getMvpView().onHomeDataLoadedFailed();
                         } else {
                             if (response.getMessage().contains("Found")) {
-                                getMvpView().onBalanceLoadedSuccessful(response);
+                                getMvpView().onHomeDataLoadedSuccessful(response);
                             } else {
-                                getMvpView().onBalanceLoadedFailed();
+                                getMvpView().onHomeDataLoadedFailed();
                             }
                         }
                     }
@@ -66,7 +66,7 @@ public class HomePresenter extends BasePresenter<HomeMvpView> {
                 if (getMvpView() == null) {
                     return;
                 }
-                getMvpView().onBalanceLoadedFailed();
+                getMvpView().onHomeDataLoadedFailed();
             }
         }, ApiResponse.class);
 
