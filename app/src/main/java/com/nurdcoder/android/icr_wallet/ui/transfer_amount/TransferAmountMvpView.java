@@ -24,7 +24,7 @@ import com.nurdcoder.android.icr_wallet.ui.base.MvpView;
  */
 
 public interface TransferAmountMvpView extends MvpView {
-    void onBalanceLoadedSuccessful(ApiResponse apiResponse);
+    void onTransferAmountSuccessful(ApiResponse apiResponse);
 
-    void onBalanceLoadedFailed();
+    void onTransferAmountFailed();
 }
