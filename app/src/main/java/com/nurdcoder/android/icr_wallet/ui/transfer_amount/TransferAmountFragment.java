@@ -11,12 +11,10 @@ import android.view.View;
 
 import com.nurdcoder.android.icr_wallet.R;
 import com.nurdcoder.android.icr_wallet.data.helper.Constants;
-import com.nurdcoder.android.icr_wallet.data.helper.keys.PreferenceKey;
 import com.nurdcoder.android.icr_wallet.data.local.home.ApiResponse;
 import com.nurdcoder.android.icr_wallet.databinding.FragmentTransferAmountBinding;
 import com.nurdcoder.android.icr_wallet.ui.base.BaseFragment;
 import com.nurdcoder.android.util.helper.KeyboardUtils;
-import com.nurdcoder.android.util.helper.SharedPreferencesManager;
 
 import java.util.Objects;
 
@@ -61,8 +59,6 @@ public class TransferAmountFragment extends BaseFragment<TransferAmountMvpView, 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mBinding = (FragmentTransferAmountBinding) getViewDataBinding();
-
-        new Handler(Objects.requireNonNull(getActivity()).getMainLooper()).postDelayed(() -> presenter.getBalance(), Constants.Integer.API_DELAY);
     }
 
     @Override
@@ -71,11 +67,11 @@ public class TransferAmountFragment extends BaseFragment<TransferAmountMvpView, 
             case R.id.button_sign_in:
                 Intent i = new Intent(getActivity(), ScanActivity.class);
                 startActivityForResult(i, 11);
-
                 break;
 
             case R.id.button_sign_up:
                 KeyboardUtils.hideSoftInput(getActivity());
+                new Handler(Objects.requireNonNull(getActivity()).getMainLooper()).postDelayed(() -> presenter.sendMoney(mBinding.editTextEmail.getText().toString(), mBinding.editTextPassword.getText().toString()), Constants.Integer.API_DELAY);
                 break;
         }
     }
@@ -119,7 +115,7 @@ public class TransferAmountFragment extends BaseFragment<TransferAmountMvpView, 
 //        mBinding.fragmentTransferAmountParentPwt.layoutProgressWithTextPb.setVisibility(View.GONE);
 //        mBinding.fragmentTransferAmountBalanceTv.setVisibility(View.VISIBLE);
 //        mBinding.fragmentTransferAmountBalanceValueTv.setVisibility(View.VISIBLE);
-//        mBinding.fragmentTransferAmountBalanceValueTv.setText(apiResponse.getBalance() + "");
+//        mBinding.fragmentTransferAmountBalanceValueTv.setText(apiResponse.sendMoney() + "");
     }
 
     @Override

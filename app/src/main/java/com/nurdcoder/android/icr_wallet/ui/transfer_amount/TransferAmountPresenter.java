@@ -37,12 +37,14 @@ import java.util.HashMap;
 
 public class TransferAmountPresenter extends BasePresenter<TransferAmountMvpView> {
 
-    public void getBalance() {
+    public void sendMoney(String address, String amount) {
         HashMap<String, String> params = new HashMap<>();
         params.put(Endpoints.Keys.TOKEN, SharedPreferencesManager.getStringSetting(getActivity(), PreferenceKey.KEY_USER_TOKEN, ""));
+        params.put(Endpoints.Keys.ADDRESS, address);
+        params.put(Endpoints.Keys.AMOUNT, amount);
         HashMap<String, String> headers = new HashMap<>();
 
-        ObjectRequest<ApiResponse> objectRequest = new ObjectRequest<>(Request.Method.POST, Endpoints.Flags.BALANCE, headers, params,
+        ObjectRequest<ApiResponse> objectRequest = new ObjectRequest<>(Request.Method.POST, Endpoints.Flags.SEND_MONEY, headers, params,
                 new Response.Listener<ApiResponse>() {
                     @Override
                     public void onResponse(ApiResponse response) {

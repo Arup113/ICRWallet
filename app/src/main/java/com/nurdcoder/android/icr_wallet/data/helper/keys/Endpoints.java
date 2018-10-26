@@ -18,12 +18,14 @@ public interface Endpoints {
         String MY_ADDRESSES = Constants.BASE_URL + "getaddress";
         String BALANCE = Constants.BASE_URL + "getbalance";
         String AE_ADDRESS = Constants.BASE_URL + "putaddresslebel";
+        String SEND_MONEY = Constants.BASE_URL + "sendamount";
     }
 
     interface Keys {
         String TOKEN = "token";
         String ADDRESS = "address";
         String LABEL = "label";
+        String AMOUNT = "amount";
     }
 
     interface Values {

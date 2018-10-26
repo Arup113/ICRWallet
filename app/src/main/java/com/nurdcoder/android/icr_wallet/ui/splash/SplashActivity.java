@@ -51,7 +51,7 @@ public class SplashActivity extends BaseActivity<SplashMvpView, SplashPresenter>
     @Override
     protected void startUI() {
         activitySplashBinding = (ActivitySplashBinding) getViewDataBinding();
-        mWaveDrawable = new WaveDrawable(this, R.drawable.mesh_store_logo);
+        mWaveDrawable = new WaveDrawable(this, R.mipmap.ic_launcher);
         mWaveDrawable.setLevel(0);
         mWaveDrawable.setWaveAmplitude(0);
         mWaveDrawable.setWaveLength(600);
