@@ -11,10 +11,13 @@ import android.view.View;
 
 import com.nurdcoder.android.icr_wallet.R;
 import com.nurdcoder.android.icr_wallet.data.helper.Constants;
-import com.nurdcoder.android.icr_wallet.data.local.home.ApiResponse;
+import com.nurdcoder.android.icr_wallet.data.helper.keys.PreferenceKey;
+import com.nurdcoder.android.icr_wallet.data.local.transfer_amount.ApiResponse;
 import com.nurdcoder.android.icr_wallet.databinding.FragmentTransferAmountBinding;
 import com.nurdcoder.android.icr_wallet.ui.base.BaseFragment;
 import com.nurdcoder.android.util.helper.KeyboardUtils;
+import com.nurdcoder.android.util.helper.SharedPreferencesManager;
+import com.nurdcoder.android.util.helper.Toaster;
 
 import java.util.Objects;
 
@@ -111,17 +114,14 @@ public class TransferAmountFragment extends BaseFragment<TransferAmountMvpView, 
 
     @Override
     public void onTransferAmountSuccessful(ApiResponse apiResponse) {
-//        SharedPreferencesManager.setStringSetting(getContext(), PreferenceKey.KEY_USER_TOKEN, apiResponse.getToken());
-//        mBinding.fragmentTransferAmountParentPwt.layoutProgressWithTextPb.setVisibility(View.GONE);
-//        mBinding.fragmentTransferAmountBalanceTv.setVisibility(View.VISIBLE);
-//        mBinding.fragmentTransferAmountBalanceValueTv.setVisibility(View.VISIBLE);
-//        mBinding.fragmentTransferAmountBalanceValueTv.setText(apiResponse.sendMoney() + "");
+        SharedPreferencesManager.setStringSetting(getContext(), PreferenceKey.KEY_USER_TOKEN, apiResponse.getToken());
+        Toaster.success(getContext(), apiResponse.getMessage());
+        mBinding.editTextEmail.setText("");
+        mBinding.editTextPassword.setText("");
     }
 
     @Override
     public void onTransferAmountFailed() {
-//        mBinding.fragmentTransferAmountParentPwt.layoutProgressWithTextPb.setVisibility(View.GONE);
-//        mBinding.fragmentTransferAmountParentPwt.layoutProgressWithTextTv.setVisibility(View.VISIBLE);
-//        mBinding.fragmentTransferAmountParentPwt.layoutProgressWithTextTv.setText(R.string.balance_failed);
+        Toaster.error(getContext(), "Transfer Amount Failed");
     }
 }

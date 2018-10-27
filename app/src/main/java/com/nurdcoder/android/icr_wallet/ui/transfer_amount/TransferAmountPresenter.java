@@ -8,7 +8,7 @@ import com.nurdcoder.android.ICRWalletApp;
 import com.nurdcoder.android.icr_wallet.data.helper.Constants;
 import com.nurdcoder.android.icr_wallet.data.helper.keys.Endpoints;
 import com.nurdcoder.android.icr_wallet.data.helper.keys.PreferenceKey;
-import com.nurdcoder.android.icr_wallet.data.local.home.ApiResponse;
+import com.nurdcoder.android.icr_wallet.data.local.transfer_amount.ApiResponse;
 import com.nurdcoder.android.icr_wallet.ui.base.BasePresenter;
 import com.nurdcoder.android.util.helper.SharedPreferencesManager;
 import com.nurdcoder.android.util.lib.volley.ObjectRequest;
@@ -55,7 +55,7 @@ public class TransferAmountPresenter extends BasePresenter<TransferAmountMvpView
                         if (response == null) {
                             getMvpView().onTransferAmountFailed();
                         } else {
-                            if (response.getMessage().contains("Found")) {
+                            if (response.getMessage().contains("Successfully")) {
                                 getMvpView().onTransferAmountSuccessful(response);
                             } else {
                                 getMvpView().onTransferAmountFailed();
