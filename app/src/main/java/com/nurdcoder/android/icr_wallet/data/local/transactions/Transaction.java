@@ -24,7 +24,7 @@ public class Transaction implements Parcelable {
     private String category;
     @SerializedName("amount")
     @Expose
-    private long amount;
+    private double amount;
     @SerializedName("confirmations")
     @Expose
     private long confirmations;
@@ -66,7 +66,7 @@ public class Transaction implements Parcelable {
      * @param account
      * @param blocktime
      */
-    public Transaction(String account, String address, String category, long amount, long confirmations, String blockhash, long blockindex, long blocktime, String txid, long time, long timereceived) {
+    public Transaction(String account, String address, String category, double amount, long confirmations, String blockhash, long blockindex, long blocktime, String txid, long time, long timereceived) {
         super();
         this.account = account;
         this.address = address;
@@ -105,11 +105,11 @@ public class Transaction implements Parcelable {
         this.category = category;
     }
 
-    public long getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(long amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
@@ -201,7 +201,7 @@ public class Transaction implements Parcelable {
         dest.writeString(this.account);
         dest.writeString(this.address);
         dest.writeString(this.category);
-        dest.writeLong(this.amount);
+        dest.writeDouble(this.amount);
         dest.writeLong(this.confirmations);
         dest.writeString(this.blockhash);
         dest.writeLong(this.blockindex);
@@ -215,7 +215,7 @@ public class Transaction implements Parcelable {
         this.account = in.readString();
         this.address = in.readString();
         this.category = in.readString();
-        this.amount = in.readLong();
+        this.amount = in.readDouble();
         this.confirmations = in.readLong();
         this.blockhash = in.readString();
         this.blockindex = in.readLong();

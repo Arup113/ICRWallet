@@ -17,7 +17,7 @@ public class ApiResponse implements Parcelable {
     private String token;
     @SerializedName("balance")
     @Expose
-    private long balance;
+    private double balance;
     @SerializedName("Message")
     @Expose
     private String message;
@@ -42,7 +42,7 @@ public class ApiResponse implements Parcelable {
 
     protected ApiResponse(Parcel in) {
         this.token = ((String) in.readValue((String.class.getClassLoader())));
-        this.balance = ((long) in.readValue((long.class.getClassLoader())));
+        this.balance = ((double) in.readValue((double.class.getClassLoader())));
         this.message = ((String) in.readValue((String.class.getClassLoader())));
         this.address = ((String) in.readValue((String.class.getClassLoader())));
         this.qrcode = ((String) in.readValue((String.class.getClassLoader())));
@@ -61,7 +61,7 @@ public class ApiResponse implements Parcelable {
      * @param token
      * @param qrcode
      */
-    public ApiResponse(String token, long balance, String message, String address, String qrcode) {
+    public ApiResponse(String token, double balance, String message, String address, String qrcode) {
         super();
         this.token = token;
         this.balance = balance;
@@ -78,11 +78,11 @@ public class ApiResponse implements Parcelable {
         this.token = token;
     }
 
-    public long getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(long balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 

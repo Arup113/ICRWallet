@@ -24,6 +24,7 @@ import com.nurdcoder.android.icr_wallet.ui.sign_in.SignInActivity;
 import com.nurdcoder.android.icr_wallet.ui.transactions.TransactionsFragment;
 import com.nurdcoder.android.icr_wallet.ui.transfer_amount.TransferAmountFragment;
 import com.nurdcoder.android.util.helper.BarUtil;
+import com.nurdcoder.android.util.helper.KeyboardUtils;
 import com.nurdcoder.android.util.helper.ScreenUtils;
 import com.nurdcoder.android.util.helper.SharedPreferencesManager;
 
@@ -76,6 +77,7 @@ public class MainActivity extends BaseActivity<MainMvpView, MainPresenter> imple
 
         setUpNavHeader();
         commitFragment(R.id.main_fragment_container, HomeFragment.newInstance());
+        setTitle(getString(R.string.home));
     }
 
     @Override
@@ -125,28 +127,6 @@ public class MainActivity extends BaseActivity<MainMvpView, MainPresenter> imple
         }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-
     @Override
     protected MainPresenter initPresenter() {
         return new MainPresenter();
@@ -158,15 +138,19 @@ public class MainActivity extends BaseActivity<MainMvpView, MainPresenter> imple
         switch (item.getItemId()) {
             case R.id.nav_home:
                 commitFragment(R.id.main_fragment_container, HomeFragment.newInstance());
+                setTitle(getString(R.string.home));
                 break;
             case R.id.nav_my_addresses:
                 commitFragment(R.id.main_fragment_container, MyAddressesFragment.newInstance());
+                setTitle(getString(R.string.my_addresses));
                 break;
             case R.id.nav_transfer_amount:
                 commitFragment(R.id.main_fragment_container, TransferAmountFragment.newInstance());
+                setTitle(getString(R.string.transfer_amount));
                 break;
             case R.id.nav_transactions:
                 commitFragment(R.id.main_fragment_container, TransactionsFragment.newInstance());
+                setTitle(getString(R.string.transactions));
                 break;
             case R.id.nav_log_out:
                 SharedPreferencesManager.setBooleanSetting(this, PreferenceKey.KEY_IS_LOGGED_IN, false);
