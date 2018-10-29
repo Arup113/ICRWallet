@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 
 import com.nurdcoder.android.icr_wallet.R;
@@ -17,6 +16,7 @@ import com.nurdcoder.android.icr_wallet.databinding.FragmentTransferAmountBindin
 import com.nurdcoder.android.icr_wallet.ui.base.BaseFragment;
 import com.nurdcoder.android.util.helper.KeyboardUtils;
 import com.nurdcoder.android.util.helper.SharedPreferencesManager;
+import com.nurdcoder.android.util.helper.ShowLog;
 import com.nurdcoder.android.util.helper.Toaster;
 
 import java.util.Objects;
@@ -84,9 +84,12 @@ public class TransferAmountFragment extends BaseFragment<TransferAmountMvpView, 
         if (requestCode == 11) {
             if (resultCode == Activity.RESULT_OK) {
                 String result = data.getStringExtra("result");
-                Log.e("Data", result);
-                if (!TextUtils.isEmpty(result))
-                    mBinding.editTextEmail.setText(result);
+                ShowLog.e("Data", result);
+                if (!TextUtils.isEmpty(result)) {
+                    String[] part  = result.split("&");
+                    mBinding.editTextEmail.setText(part[0].replaceAll("address=",""));
+                    mBinding.editTextPassword.setText(part[1].replaceAll("amount=",""));
+                }
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result

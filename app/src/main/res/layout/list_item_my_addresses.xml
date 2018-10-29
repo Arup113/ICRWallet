@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/list_row_doctor_parent_cv"
+    android:id="@+id/list_item_my_addresses_parent_cv"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/size_6dp"
     android:clickable="true"
     android:focusable="true"
     card_view:cardBackgroundColor="@color/white"
@@ -14,76 +14,94 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/size_5dp">
+        android:orientation="horizontal"
+        android:weightSum="1">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/list_item_my_addresses_parent_vll"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="@dimen/size_5dp"
-            android:weightSum="1">
+            android:layout_weight=".9"
+            android:orientation="vertical"
+            android:padding="@dimen/size_5dp">
 
-            <TextView
-                style="?android:textAppearanceSmall"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="Label"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/size_5dp"
+                android:weightSum="1">
 
-            <TextView
-                style="?android:textAppearanceSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" : "
-                android:textColor="@color/black"
-                android:textStyle="bold" />
+                <TextView
+                    style="?android:textAppearanceSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".2"
+                    android:text="Label"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/list_item_my_addresses_label_tv"
-                style="?android:textAppearanceSmall"
-                android:layout_width="0dp"
+                <TextView
+                    style="?android:textAppearanceSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/list_item_my_addresses_label_tv"
+                    style="?android:textAppearanceSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".8"
-                android:textColor="@color/black" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/size_5dp"
+                android:weightSum="1">
+
+                <TextView
+                    style="?android:textAppearanceSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".2"
+                    android:text="Address"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    style="?android:textAppearanceSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" : "
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/list_item_my_addresses_address_tv"
+                    style="?android:textAppearanceSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/list_item_my_addresses_edit_acid"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".1"
+            android:background="@color/transparent"
             android:padding="@dimen/size_5dp"
-            android:weightSum="1">
-
-            <TextView
-                style="?android:textAppearanceSmall"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".2"
-                android:text="Address"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
-
-            <TextView
-                style="?android:textAppearanceSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" : "
-                android:textColor="@color/black"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/list_item_my_addresses_address_tv"
-                style="?android:textAppearanceSmall"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".8"
-                android:textColor="@color/black" />
-
-        </LinearLayout>
+            app:srcCompat="@drawable/ic_edit" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

@@ -20,6 +20,7 @@ import com.nurdcoder.android.icr_wallet.databinding.ActivityMainBinding;
 import com.nurdcoder.android.icr_wallet.ui.base.BaseActivity;
 import com.nurdcoder.android.icr_wallet.ui.home.HomeFragment;
 import com.nurdcoder.android.icr_wallet.ui.my_addresses.MyAddressesFragment;
+import com.nurdcoder.android.icr_wallet.ui.my_key.MyKeyFragment;
 import com.nurdcoder.android.icr_wallet.ui.sign_in.SignInActivity;
 import com.nurdcoder.android.icr_wallet.ui.transactions.TransactionsFragment;
 import com.nurdcoder.android.icr_wallet.ui.transfer_amount.TransferAmountFragment;
@@ -70,7 +71,17 @@ public class MainActivity extends BaseActivity<MainMvpView, MainPresenter> imple
         setUpToolbar();
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, mBinding.drawerLayout, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, mBinding.drawerLayout, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                // Do whatever you want here
+            }
+
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                KeyboardUtils.hideSoftInput(MainActivity.this);
+            }
+        };
         mBinding.drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         mBinding.navView.setNavigationItemSelectedListener(this);
@@ -151,6 +162,10 @@ public class MainActivity extends BaseActivity<MainMvpView, MainPresenter> imple
             case R.id.nav_transactions:
                 commitFragment(R.id.main_fragment_container, TransactionsFragment.newInstance());
                 setTitle(getString(R.string.transactions));
+                break;
+            case R.id.nav_my_key:
+                commitFragment(R.id.main_fragment_container, MyKeyFragment.newInstance());
+                setTitle(getString(R.string.my_key));
                 break;
             case R.id.nav_log_out:
                 SharedPreferencesManager.setBooleanSetting(this, PreferenceKey.KEY_IS_LOGGED_IN, false);

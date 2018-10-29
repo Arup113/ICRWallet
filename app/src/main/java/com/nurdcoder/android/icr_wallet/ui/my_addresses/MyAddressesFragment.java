@@ -7,8 +7,6 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 
 import com.nurdcoder.android.icr_wallet.R;
@@ -17,7 +15,7 @@ import com.nurdcoder.android.icr_wallet.data.helper.keys.PreferenceKey;
 import com.nurdcoder.android.icr_wallet.data.local.my_addresses.Address;
 import com.nurdcoder.android.icr_wallet.data.local.my_addresses.ApiResponse;
 import com.nurdcoder.android.icr_wallet.databinding.FragmentMyAddressesBinding;
-import com.nurdcoder.android.icr_wallet.ui.ae_address.AEAddressActivity;
+import com.nurdcoder.android.icr_wallet.ui.aed_address.AEDAddressActivity;
 import com.nurdcoder.android.icr_wallet.ui.base.BaseFragment;
 import com.nurdcoder.android.util.helper.CustomRecyclerItemSpaceDecoration;
 import com.nurdcoder.android.util.helper.ScreenUtils;
@@ -46,7 +44,7 @@ import java.util.Objects;
  * ****************************************************************************
  */
 
-public class MyAddressesFragment extends BaseFragment<MyAddressesMvpView, MyAddressesPresenter> implements MyAddressesMvpView {
+public class MyAddressesFragment extends BaseFragment<MyAddressesMvpView, MyAddressesPresenter> implements MyAddressesMvpView, MyAddressOperationListener {
 
     private FragmentMyAddressesBinding mBinding;
 
@@ -74,7 +72,7 @@ public class MyAddressesFragment extends BaseFragment<MyAddressesMvpView, MyAddr
 
         mDataList = new ArrayList<>();
         mBinding.fragmentMyAddressesParentRv.setHasFixedSize(true);
-        mAdapter = new MyAddressesRecyclerAdapter(mDataList, getContext());
+        mAdapter = new MyAddressesRecyclerAdapter(mDataList, getContext(), this);
 
         mBinding.fragmentMyAddressesParentRv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mBinding.fragmentMyAddressesParentRv.addItemDecoration(new CustomRecyclerItemSpaceDecoration(ScreenUtils.dp2px(Objects.requireNonNull(getContext()), 10), 0, ScreenUtils.dp2px(getContext(), 10), ScreenUtils.dp2px(getContext(), 10), ScreenUtils.dp2px(getContext(), 10), ScreenUtils.dp2px(getContext(), 10)));
@@ -86,41 +84,6 @@ public class MyAddressesFragment extends BaseFragment<MyAddressesMvpView, MyAddr
             public boolean onFling(int velocityX, int velocityY) {
                 mBinding.fragmentMyAddressesParentRv.dispatchNestedFling(velocityX, velocityY, false);
                 return false;
-            }
-        });
-
-        mBinding.fragmentMyAddressesParentRv.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            GestureDetector gestureDetector = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener() {
-                @Override
-                public boolean onSingleTapUp(MotionEvent e) {
-                    return true;
-                }
-            });
-
-            @Override
-            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-
-                View child = rv.findChildViewUnder(e.getX(), e.getY());
-                if (child != null && gestureDetector.onTouchEvent(e)) {
-                    int position = rv.getChildAdapterPosition(child);
-                    Intent intent = new Intent(getContext(), AEAddressActivity.class);
-                    intent.putExtra(AEAddressActivity.EXTRA_TYPE, Constants.Integer.ONE);
-                    intent.putExtra(AEAddressActivity.EXTRA_POSITION, position);
-                    intent.putExtra(AEAddressActivity.EXTRA_DATA, mDataList.get(position));
-                    startActivityForResult(intent, Constants.Integer.ONE);
-                    Objects.requireNonNull(getActivity()).overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-                }
-                return false;
-            }
-
-            @Override
-            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
             }
         });
 
@@ -144,8 +107,8 @@ public class MyAddressesFragment extends BaseFragment<MyAddressesMvpView, MyAddr
 
         switch (view.getId()) {
             case R.id.fragment_my_addresses_parent_fab:
-                Intent intent = new Intent(getContext(), AEAddressActivity.class);
-                intent.putExtra(AEAddressActivity.EXTRA_TYPE, Constants.Integer.ZERO);
+                Intent intent = new Intent(getContext(), AEDAddressActivity.class);
+                intent.putExtra(AEDAddressActivity.EXTRA_TYPE, Constants.Integer.ZERO);
                 startActivityForResult(intent, Constants.Integer.ZERO);
                 Objects.requireNonNull(getActivity()).overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
                 break;
@@ -156,7 +119,7 @@ public class MyAddressesFragment extends BaseFragment<MyAddressesMvpView, MyAddr
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
-            Address address = Objects.requireNonNull(data.getExtras()).getParcelable(AEAddressActivity.EXTRA_DATA);
+            Address address = Objects.requireNonNull(data.getExtras()).getParcelable(AEDAddressActivity.EXTRA_DATA);
             switch (requestCode) {
                 case Constants.Integer.ZERO:
                     mDataList.add(address);
@@ -167,7 +130,7 @@ public class MyAddressesFragment extends BaseFragment<MyAddressesMvpView, MyAddr
                     }
                     break;
                 case Constants.Integer.ONE:
-                    int position = data.getExtras().getInt(AEAddressActivity.EXTRA_POSITION);
+                    int position = data.getExtras().getInt(AEDAddressActivity.EXTRA_POSITION);
                     mDataList.remove(position);
                     mDataList.add(position, address);
                     mAdapter.notifyDataSetChanged();
@@ -201,5 +164,25 @@ public class MyAddressesFragment extends BaseFragment<MyAddressesMvpView, MyAddr
         mBinding.fragmentMyAddressesParentPwt.layoutProgressWithTextPb.setVisibility(View.GONE);
         mBinding.fragmentMyAddressesParentPwt.layoutProgressWithTextTv.setVisibility(View.VISIBLE);
         mBinding.fragmentMyAddressesParentPwt.layoutProgressWithTextTv.setText(R.string.transactions_failed);
+    }
+
+    @Override
+    public void onAddressClicked(int position) {
+        Intent intent = new Intent(getContext(), AEDAddressActivity.class);
+        intent.putExtra(AEDAddressActivity.EXTRA_TYPE, Constants.Integer.TWO);
+        intent.putExtra(AEDAddressActivity.EXTRA_POSITION, position);
+        intent.putExtra(AEDAddressActivity.EXTRA_DATA, mDataList.get(position));
+        startActivity(intent);
+        Objects.requireNonNull(getActivity()).overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+    }
+
+    @Override
+    public void onAddressEditClicked(int position) {
+        Intent intent = new Intent(getContext(), AEDAddressActivity.class);
+        intent.putExtra(AEDAddressActivity.EXTRA_TYPE, Constants.Integer.ONE);
+        intent.putExtra(AEDAddressActivity.EXTRA_POSITION, position);
+        intent.putExtra(AEDAddressActivity.EXTRA_DATA, mDataList.get(position));
+        startActivityForResult(intent, Constants.Integer.ONE);
+        Objects.requireNonNull(getActivity()).overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
     }
 }

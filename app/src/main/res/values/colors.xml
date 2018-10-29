@@ -36,4 +36,5 @@
     <color name="accent">#666666</color>
     <color name="color_green">#FF32B27E</color>
     <color name="black_effective">#2a2a2a</color>
+    <color name="transparent">#00000000</color>
 </resources>

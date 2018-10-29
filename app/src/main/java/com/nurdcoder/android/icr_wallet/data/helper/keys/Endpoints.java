@@ -12,13 +12,14 @@ package com.nurdcoder.android.icr_wallet.data.helper.keys;
 public interface Endpoints {
     interface Flags {
         String RECAPTCHA = "recaptcha";
-        String LOG_IN = Constants.BASE_URL + "login";
-        String SIGN_UP = Constants.BASE_URL + "register";
-        String TRANSACTIONS = Constants.BASE_URL + "gettransactions";
-        String MY_ADDRESSES = Constants.BASE_URL + "getaddress";
-        String BALANCE = Constants.BASE_URL + "getbalance";
-        String AE_ADDRESS = Constants.BASE_URL + "putaddresslebel";
-        String SEND_MONEY = Constants.BASE_URL + "sendamount";
+        String LOG_IN = Constants.BASE_URL + Constants.API + "login";
+        String SIGN_UP = Constants.BASE_URL + Constants.API + "register";
+        String TRANSACTIONS = Constants.BASE_URL + Constants.API + "gettransactions";
+        String MY_ADDRESSES = Constants.BASE_URL + Constants.API + "getaddress";
+        String BALANCE = Constants.BASE_URL + Constants.API + "getbalance";
+        String MY_KEY = Constants.BASE_URL + Constants.API + "getbalance";
+        String AE_ADDRESS = Constants.BASE_URL + Constants.API + "putaddresslebel";
+        String SEND_MONEY = Constants.BASE_URL + Constants.API + "sendamount";
     }
 
     interface Keys {
@@ -32,6 +33,8 @@ public interface Endpoints {
     }
 
     interface Constants {
-        String BASE_URL = "https://icr-wallet.com/api/";
+        String BASE_URL = "https://icr-wallet.com/";
+        String API = "api/";
+        String QR_CODE = "https://icr-wallet.com/api/";
     }
 }

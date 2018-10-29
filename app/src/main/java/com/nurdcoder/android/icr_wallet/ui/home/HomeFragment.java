@@ -11,7 +11,6 @@ import com.nurdcoder.android.icr_wallet.data.helper.keys.PreferenceKey;
 import com.nurdcoder.android.icr_wallet.data.local.home.ApiResponse;
 import com.nurdcoder.android.icr_wallet.databinding.FragmentHomeBinding;
 import com.nurdcoder.android.icr_wallet.ui.base.BaseFragment;
-import com.nurdcoder.android.util.helper.Glider;
 import com.nurdcoder.android.util.helper.SharedPreferencesManager;
 
 import java.util.Objects;
@@ -83,14 +82,7 @@ public class HomeFragment extends BaseFragment<HomeMvpView, HomePresenter> imple
 
         mBinding.fragmentHomeBalanceTv.setVisibility(View.VISIBLE);
         mBinding.fragmentHomeBalanceValueTv.setVisibility(View.VISIBLE);
-
-        mBinding.fragmentHomeKeyTv.setVisibility(View.VISIBLE);
-        mBinding.fragmentHomeKeyValueTv.setVisibility(View.VISIBLE);
-        mBinding.fragmentHomeKeyIv.setVisibility(View.VISIBLE);
-        
         mBinding.fragmentHomeBalanceValueTv.setText(apiResponse.getBalance() + "");
-        mBinding.fragmentHomeKeyValueTv.setText(apiResponse.getAddress());
-        Glider.show(getContext(), apiResponse.getQrcode(), mBinding.fragmentHomeKeyIv);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.nurdcoder.android.icr_wallet.ui.ae_address;
+package com.nurdcoder.android.icr_wallet.ui.aed_address;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -8,7 +8,7 @@ import com.nurdcoder.android.ICRWalletApp;
 import com.nurdcoder.android.icr_wallet.data.helper.Constants;
 import com.nurdcoder.android.icr_wallet.data.helper.keys.Endpoints;
 import com.nurdcoder.android.icr_wallet.data.helper.keys.PreferenceKey;
-import com.nurdcoder.android.icr_wallet.data.local.ae_address.ApiResponse;
+import com.nurdcoder.android.icr_wallet.data.local.aed_address.ApiResponse;
 import com.nurdcoder.android.icr_wallet.data.local.my_addresses.Address;
 import com.nurdcoder.android.icr_wallet.ui.base.BasePresenter;
 import com.nurdcoder.android.util.helper.SharedPreferencesManager;
@@ -19,7 +19,7 @@ import java.util.HashMap;
 /**
  * Created by: MD. REZWANUR RAHMAN KHAN on 8/3/2018 at 12:33 AM.
  * Email: rezwanur@w3engineers.com
- * Code Responsibility: Presenter class for {@link AEAddressActivity}
+ * Code Responsibility: Presenter class for {@link AEDAddressActivity}
  * Last edited by : MD. REZWANUR RAHMAN KHAN on 9/25/2018.
  * Last Reviewed by : <NAME> on <DATE>.
  * Copyright (c) 2018, W3 Engineers Ltd. All rights reserved.

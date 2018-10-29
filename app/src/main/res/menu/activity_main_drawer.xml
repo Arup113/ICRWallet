@@ -21,6 +21,10 @@
             android:id="@+id/nav_transactions"
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/transactions" />
+        <item
+            android:id="@+id/nav_my_key"
+            android:icon="@drawable/ic_menu_share"
+            android:title="@string/my_key" />
     </group>
     <group android:checkableBehavior="none">
         <item

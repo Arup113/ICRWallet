@@ -1,6 +1,6 @@
-package com.nurdcoder.android.icr_wallet.ui.ae_address;
+package com.nurdcoder.android.icr_wallet.ui.aed_address;
 
-import com.nurdcoder.android.icr_wallet.data.local.ae_address.ApiResponse;
+import com.nurdcoder.android.icr_wallet.data.local.aed_address.ApiResponse;
 import com.nurdcoder.android.icr_wallet.ui.base.MvpView;
 
 /**

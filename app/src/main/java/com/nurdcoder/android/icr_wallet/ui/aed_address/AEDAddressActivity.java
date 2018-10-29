@@ -1,4 +1,4 @@
-package com.nurdcoder.android.icr_wallet.ui.ae_address;
+package com.nurdcoder.android.icr_wallet.ui.aed_address;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,11 +7,13 @@ import android.view.View;
 
 import com.nurdcoder.android.icr_wallet.R;
 import com.nurdcoder.android.icr_wallet.data.helper.Constants;
+import com.nurdcoder.android.icr_wallet.data.helper.keys.Endpoints;
 import com.nurdcoder.android.icr_wallet.data.helper.keys.PreferenceKey;
-import com.nurdcoder.android.icr_wallet.data.local.ae_address.ApiResponse;
+import com.nurdcoder.android.icr_wallet.data.local.aed_address.ApiResponse;
 import com.nurdcoder.android.icr_wallet.data.local.my_addresses.Address;
-import com.nurdcoder.android.icr_wallet.databinding.ActivityAeAddressBinding;
+import com.nurdcoder.android.icr_wallet.databinding.ActivityAedAddressBinding;
 import com.nurdcoder.android.icr_wallet.ui.base.BaseActivity;
+import com.nurdcoder.android.util.helper.Glider;
 import com.nurdcoder.android.util.helper.KeyboardUtils;
 import com.nurdcoder.android.util.helper.SharedPreferencesManager;
 import com.nurdcoder.android.util.helper.Toaster;
@@ -24,12 +26,12 @@ import com.nurdcoder.android.util.helper.Toaster;
  * Last Reviewed by : <NAME> on <DATE>.
  * Copyright (c) 2018, W3 Engineers Ltd. All rights reserved.
  */
-public class AEAddressActivity extends BaseActivity<AEAddressMVPView, AEAddressPresenter> implements AEAddressMVPView {
+public class AEDAddressActivity extends BaseActivity<AEAddressMVPView, AEAddressPresenter> implements AEAddressMVPView {
 
     public static final String EXTRA_TYPE = "EXTRA_TYPE";
     public static final String EXTRA_DATA = "EXTRA_DATA";
     public static final String EXTRA_POSITION = "EXTRA_POSITION";
-    private ActivityAeAddressBinding mBinding;
+    private ActivityAedAddressBinding mBinding;
     private int mType;
     private int mPosition;
     private Address mData;
@@ -42,14 +44,14 @@ public class AEAddressActivity extends BaseActivity<AEAddressMVPView, AEAddressP
      * @param context context
      **/
     public static void runActivityForResult(Context context) {
-        Intent intent = new Intent(context, AEAddressActivity.class);
+        Intent intent = new Intent(context, AEDAddressActivity.class);
         runCurrentActivity(context, intent);
     }
 
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_ae_address;
+        return R.layout.activity_aed_address;
     }
 
     @Override
@@ -62,7 +64,7 @@ public class AEAddressActivity extends BaseActivity<AEAddressMVPView, AEAddressP
 
     @Override
     protected void startUI() {
-        mBinding = (ActivityAeAddressBinding) getViewDataBinding();
+        mBinding = (ActivityAedAddressBinding) getViewDataBinding();
         setClickListener(mBinding.buttonSubmit, mBinding.ibBack);
 
         Bundle bundle = getIntent().getExtras();
@@ -73,9 +75,26 @@ public class AEAddressActivity extends BaseActivity<AEAddressMVPView, AEAddressP
         }
 
         if (mType == Constants.Integer.ONE) {
+            mBinding.editTextLabel.setVisibility(View.VISIBLE);
             mBinding.editTextAddress.setVisibility(View.VISIBLE);
+            mBinding.buttonSubmit.setVisibility(View.VISIBLE);
+            mBinding.progressBar.setVisibility(View.VISIBLE);
+            mBinding.textVerify.setText(R.string.edit_address_header);
             mBinding.editTextLabel.setText(mData.getLabel());
             mBinding.editTextAddress.setText(mData.getAddress());
+            mBinding.buttonSubmit.setText(R.string.update);
+        } else if (mType == Constants.Integer.TWO) {
+            mBinding.textVerify.setText(R.string.detail_address_header);
+            mBinding.imageViewAddress.setVisibility(View.VISIBLE);
+            mBinding.textViewAddress.setVisibility(View.VISIBLE);
+            mBinding.textViewAddress.setText(mData.getAddress());
+            Glider.show(this, Endpoints.Constants.BASE_URL + Endpoints.Constants.QR_CODE + mData.getAddress(), mBinding.imageViewAddress);
+        } else {
+            mBinding.editTextLabel.setVisibility(View.VISIBLE);
+            mBinding.buttonSubmit.setVisibility(View.VISIBLE);
+            mBinding.progressBar.setVisibility(View.VISIBLE);
+            mBinding.buttonSubmit.setText(R.string.submit);
+            mBinding.textVerify.setText(R.string.add_address_header);
         }
     }
 
@@ -99,7 +118,7 @@ public class AEAddressActivity extends BaseActivity<AEAddressMVPView, AEAddressP
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_submit:
-                KeyboardUtils.hideSoftInput(AEAddressActivity.this);
+                KeyboardUtils.hideSoftInput(AEDAddressActivity.this);
                 mBinding.buttonSubmit.setVisibility(View.GONE);
                 presenter.aeAddress(mType, mData, mBinding.editTextLabel.getText().toString());
                 break;

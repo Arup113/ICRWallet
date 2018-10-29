@@ -76,12 +76,16 @@
     <string name="title_not_success">Not Success!!!</string>
     <string name="dialog_ok">OK</string>
     <string name="dialog_cancel">CANCEL</string>
-    
+
     <string name="transactions_failed">Failed to fetch Transactions data.</string>
     <string name="transactions_empty">There is no Transactions data available.</string>
     <string name="balance_failed">Failed to fetch Balance data.</string>
+    <string name="my_key_failed">Failed to fetch My Private Key data.</string>
     <string name="add_address_header">Create Label for New Address</string>
     <string name="edit_address_header">Edit Label for Existing Address</string>
+    <string name="detail_address_header">My Address</string>
     <string name="Label">Label</string>
     <string name="address">Address</string>
+    <string name="my_key">MY PRIVATE KEY</string>
+    <string name="update">UPDATE</string>
 </resources>

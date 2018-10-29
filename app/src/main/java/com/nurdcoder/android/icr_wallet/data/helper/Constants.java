@@ -12,5 +12,6 @@ public interface Constants {
         int ONE = 1;
         int API_DELAY = 500;
         int SOCKET_TIMEOUT_MS = 3000;
+        int TWO = 2;
     }
 }

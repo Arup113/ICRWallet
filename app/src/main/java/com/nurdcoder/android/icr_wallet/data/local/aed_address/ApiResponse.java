@@ -1,4 +1,4 @@
-package com.nurdcoder.android.icr_wallet.data.local.ae_address;
+package com.nurdcoder.android.icr_wallet.data.local.aed_address;
 
 import android.os.Parcel;
 import android.os.Parcelable;
