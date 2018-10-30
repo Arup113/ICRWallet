@@ -50,7 +50,7 @@ import java.security.NoSuchAlgorithmException;
  * ****************************************************************************
  */
 
-@ReportsCrashes(mailTo = "mithun@w3engineers.com", // my email here
+@ReportsCrashes(mailTo = "to.shoshi@gmail.com", // my email here
         mode = ReportingInteractionMode.TOAST,
         resToastText = R.string.crash_toast_text,
         customReportContent = {

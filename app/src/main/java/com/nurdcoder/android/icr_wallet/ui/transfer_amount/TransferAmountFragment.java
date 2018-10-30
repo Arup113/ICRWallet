@@ -21,6 +21,8 @@ import com.nurdcoder.android.util.helper.Toaster;
 
 import java.util.Objects;
 
+import static com.nurdcoder.android.icr_wallet.data.helper.Constants.Integer.TWO;
+
 /**
  * ****************************************************************************
  * * Copyright © 2018 W3 Engineers Ltd., All rights reserved.
@@ -69,7 +71,7 @@ public class TransferAmountFragment extends BaseFragment<TransferAmountMvpView, 
         switch (view.getId()) {
             case R.id.button_sign_in:
                 Intent i = new Intent(getActivity(), ScanActivity.class);
-                startActivityForResult(i, 11);
+                startActivityForResult(i, TWO);
                 break;
 
             case R.id.button_sign_up:
@@ -81,14 +83,20 @@ public class TransferAmountFragment extends BaseFragment<TransferAmountMvpView, 
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 11) {
+        if (requestCode == TWO) {
             if (resultCode == Activity.RESULT_OK) {
                 String result = data.getStringExtra("result");
                 ShowLog.e("Data", result);
                 if (!TextUtils.isEmpty(result)) {
-                    String[] part  = result.split("&");
-                    mBinding.editTextEmail.setText(part[0].replaceAll("address=",""));
-                    mBinding.editTextPassword.setText(part[1].replaceAll("amount=",""));
+                    String[] part = result.split("&");
+                    for (int i = 0; i < part.length; i++) {
+                        if (part[i].contains("address=")) {
+                            mBinding.editTextEmail.setText(part[0].replaceAll("address=", ""));
+                        }
+                        if (part[i].contains("amount=")) {
+                            mBinding.editTextPassword.setText(part[1].replaceAll("amount=", ""));
+                        }
+                    }
                 }
             }
             if (resultCode == Activity.RESULT_CANCELED) {
