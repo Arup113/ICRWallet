@@ -35,6 +35,6 @@ public interface Endpoints {
     interface Constants {
         String BASE_URL = "https://icr-wallet.com/";
         String API = "api/";
-        String QR_CODE = "https://icr-wallet.com/api/";
+        String QR_CODE = "qrcode/";
     }
 }

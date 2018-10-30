@@ -16,6 +16,7 @@ import com.nurdcoder.android.icr_wallet.ui.base.BaseActivity;
 import com.nurdcoder.android.util.helper.Glider;
 import com.nurdcoder.android.util.helper.KeyboardUtils;
 import com.nurdcoder.android.util.helper.SharedPreferencesManager;
+import com.nurdcoder.android.util.helper.ShowLog;
 import com.nurdcoder.android.util.helper.Toaster;
 
 /**
@@ -88,7 +89,9 @@ public class AEDAddressActivity extends BaseActivity<AEAddressMVPView, AEAddress
             mBinding.imageViewAddress.setVisibility(View.VISIBLE);
             mBinding.textViewAddress.setVisibility(View.VISIBLE);
             mBinding.textViewAddress.setText(mData.getAddress());
-            Glider.show(this, Endpoints.Constants.BASE_URL + Endpoints.Constants.QR_CODE + mData.getAddress(), mBinding.imageViewAddress);
+            String url = Endpoints.Constants.BASE_URL + Endpoints.Constants.QR_CODE + mData.getAddress() + ".png";
+            ShowLog.e("Data", url);
+            Glider.show(this, url, mBinding.imageViewAddress);
         } else {
             mBinding.editTextLabel.setVisibility(View.VISIBLE);
             mBinding.buttonSubmit.setVisibility(View.VISIBLE);
