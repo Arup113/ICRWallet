@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion rootProject.ext.COMPILE_SDK_VERSION
+
     defaultConfig {
         applicationId "com.nurdcoder.android.icr_wallet"
         minSdkVersion rootProject.ext.MIN_SDK_VERSION
@@ -35,7 +36,7 @@ android {
         // TODO Add your release keystore in /keystore folder
         release {
             storeFile file('keystore/release.keystore')
-            keyAlias 'alias'
+            keyAlias 'nurdcoder'
             storePassword "$System.env.APP_KEY"
             keyPassword "$System.env.APP_KEY"
         }
@@ -52,7 +53,7 @@ android {
         release {
             signingConfig signingConfigs.release
 
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
             ext.betaDistributionReleaseNotesFilePath = file('../crashlytics_release_notes.txt').absolutePath
@@ -97,7 +98,6 @@ android {
     }
 
     lintOptions {
-        warning 'InvalidPackage'
         checkReleaseBuilds false
         abortOnError false
     }

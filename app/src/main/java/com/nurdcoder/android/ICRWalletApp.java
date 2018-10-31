@@ -27,7 +27,6 @@ import android.text.TextUtils;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.facebook.stetho.Stetho;
 import com.nurdcoder.android.icr_wallet.BuildConfig;
 import com.nurdcoder.android.icr_wallet.R;
 import com.nurdcoder.android.icr_wallet.data.helper.RemoteHelper;
@@ -188,7 +187,7 @@ public class ICRWalletApp extends MultiDexApplication {
     private void debugLoader(Context context) {
         if (!BuildConfig.DEBUG) return;
 
-        Stetho.initializeWithDefaults(context);
+//        Stetho.initializeWithDefaults(context);
         //Timber.plant(new Timber.DebugTree());//skpaik: Comment Out
         //new DemoHelper().startUpEvents(context);
     }
