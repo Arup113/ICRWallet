@@ -1,10 +1,10 @@
 /*
- * Copyright (C) 2017 MINDORKS NEXTGEN PRIVATE LIMITED
+ * Copyright (C) 2017 NURDCODER
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     https://mindorks.com/license/apache-v2
+ *     https://nurdcoder.com/license/apache-v2
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,6 +24,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.provider.Settings;
 import android.text.TextUtils;
 
+import com.nurdcoder.android.icr_wallet.R;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -32,17 +34,30 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.nurdcoder.android.icr_wallet.R;
-
-
 /**
- * Created by janisharali on 27/01/17.
+ * ****************************************************************************
+ * * Copyright © 2018 W3 Engineers Ltd., All rights reserved.
+ * *
+ * * Created by:
+ * * Name : ZOARDER AL MUKTADIR
+ * * Date : 10/25/2018
+ * * Email : muktadir@nurdcoder.com
+ * *
+ * * Purpose :
+ * *
+ * * Last Edited by : ZOARDER AL MUKTADIR on 10/25/2018.
+ * * History:
+ * * 1: Create the Class
+ * * 2:
+ * *
+ * * Last Reviewed by : ZOARDER AL MUKTADIR on 10/25/2018.
+ * ****************************************************************************
  */
 
 public final class CommonUtils {
 
-    private static final String TAG = "CommonUtils";
     public static final String TIMESTAMP_FORMAT = "yyyyMMdd_HHmmss";
+    private static final String TAG = "CommonUtils";
 
     private CommonUtils() {
         // This utility class is not publicly instantiable

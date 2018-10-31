@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2017 NURDCODER
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://nurdcoder.com/license/apache-v2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License
+ */
+
 package com.nurdcoder.android.util.helper;
 
 import android.app.Activity;
@@ -5,13 +20,25 @@ import android.app.ProgressDialog;
 import android.content.Context;
 
 /**
- * Created by: MD. REZWANUR RAHMAN KHAN on 9/11/2018 at 6:06 PM.
- * Email: rezwanur@w3engineers.com
- * Code Responsibility: Progress dialog helper class
- * Last edited by : Rezwanur on 9/11/18.
- * Last Reviewed by : <NAME> on <DATE>.
- * Copyright (c) 2018, W3 Engineers Ltd. All rights reserved.
+ * ****************************************************************************
+ * * Copyright © 2018 W3 Engineers Ltd., All rights reserved.
+ * *
+ * * Created by:
+ * * Name : ZOARDER AL MUKTADIR
+ * * Date : 10/25/2018
+ * * Email : muktadir@nurdcoder.com
+ * *
+ * * Purpose :
+ * *
+ * * Last Edited by : ZOARDER AL MUKTADIR on 10/25/2018.
+ * * History:
+ * * 1: Create the Class
+ * * 2:
+ * *
+ * * Last Reviewed by : ZOARDER AL MUKTADIR on 10/25/2018.
+ * ****************************************************************************
  */
+
 public class ProgressDialogHelper {
 
     ProgressDialog mProgressDialog;

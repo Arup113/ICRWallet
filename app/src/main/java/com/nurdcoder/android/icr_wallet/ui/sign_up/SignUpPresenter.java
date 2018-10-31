@@ -1,5 +1,19 @@
-package com.nurdcoder.android.icr_wallet.ui.sign_up;
+/*
+ * Copyright (C) 2017 NURDCODER
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://nurdcoder.com/license/apache-v2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License
+ */
 
+package com.nurdcoder.android.icr_wallet.ui.sign_up;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,24 +28,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.nurdcoder.android.ICRWalletApp;
-import com.nurdcoder.android.icr_wallet.data.helper.keys.Endpoints;
-import com.nurdcoder.android.icr_wallet.data.helper.keys.PreferenceKey;
-import com.nurdcoder.android.icr_wallet.ui.sign_in.SignInPresenter;
-import com.nurdcoder.android.util.helper.SharedPreferencesManager;
-import com.nurdcoder.android.util.helper.ShowLog;
-import com.parse.ParseException;
-import com.parse.ParseFile;
-import com.parse.SaveCallback;
-
 import com.nurdcoder.android.icr_wallet.R;
 import com.nurdcoder.android.icr_wallet.data.helper.Constants;
-import com.nurdcoder.android.icr_wallet.data.remote.RemoteApi;
-import com.nurdcoder.android.icr_wallet.data.remote.helper.callback.AuthSignUpCallback;
-import com.nurdcoder.android.icr_wallet.data.remote.helper.models.RemoteObject;
+import com.nurdcoder.android.icr_wallet.data.helper.keys.Endpoints;
 import com.nurdcoder.android.icr_wallet.ui.base.BasePresenter;
 import com.nurdcoder.android.util.helper.CommonUtils;
-import com.nurdcoder.android.util.helper.ImageProcessingUtil;
-import com.nurdcoder.android.util.helper.Toaster;
+import com.nurdcoder.android.util.helper.ShowLog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,14 +42,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by: MD. REZWANUR RAHMAN KHAN on 8/1/2018 at 1:33 AM.
- * Email: rezwanur@w3engineers.com
- * Code Responsibility: Presenter class
- * Last edited by : Rezwanur on 10/15/2018.
- * Last Reviewed by : Rezwanur on 10/15/2018.
- * Copyright (c) 2018, W3 Engineers Ltd. All rights reserved.
+ * ****************************************************************************
+ * * Copyright © 2018 W3 Engineers Ltd., All rights reserved.
+ * *
+ * * Created by:
+ * * Name : ZOARDER AL MUKTADIR
+ * * Date : 10/25/2018
+ * * Email : muktadir@nurdcoder.com
+ * *
+ * * Purpose :
+ * *
+ * * Last Edited by : ZOARDER AL MUKTADIR on 10/25/2018.
+ * * History:
+ * * 1: Create the Class
+ * * 2:
+ * *
+ * * Last Reviewed by : ZOARDER AL MUKTADIR on 10/25/2018.
+ * ****************************************************************************
  */
-
 
 public class SignUpPresenter extends BasePresenter<SignUpMvpView> {
     private final static String TAG = SignUpPresenter.class.getSimpleName();

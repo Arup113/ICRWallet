@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2017 NURDCODER
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://nurdcoder.com/license/apache-v2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License
+ */
+
 package com.nurdcoder.android.util.helper;
 
 import android.app.Activity;
@@ -43,6 +58,25 @@ import id.zelory.compressor.Compressor;
 
 import static android.graphics.BitmapFactory.decodeByteArray;
 
+/**
+ * ****************************************************************************
+ * * Copyright © 2018 W3 Engineers Ltd., All rights reserved.
+ * *
+ * * Created by:
+ * * Name : ZOARDER AL MUKTADIR
+ * * Date : 10/25/2018
+ * * Email : muktadir@nurdcoder.com
+ * *
+ * * Purpose :
+ * *
+ * * Last Edited by : ZOARDER AL MUKTADIR on 10/25/2018.
+ * * History:
+ * * 1: Create the Class
+ * * 2:
+ * *
+ * * Last Reviewed by : ZOARDER AL MUKTADIR on 10/25/2018.
+ * ****************************************************************************
+ */
 
 public class ImageProcessingUtil {
 
@@ -72,6 +106,7 @@ public class ImageProcessingUtil {
 
         return inSampleSize;
     }
+
     public static String savePicture(final Context context, final Bitmap finalBitmap, String imageName) {
 
         String root = Environment.getExternalStorageDirectory().toString();
@@ -80,15 +115,15 @@ public class ImageProcessingUtil {
         Random generator = new Random();
         int n = 10000;
         n = generator.nextInt(n);
-        String fname="";
-        if(TextUtils.isEmpty(imageName)){
-             fname = "Image-"+ n +".jpg";
-        }else{
+        String fname = "";
+        if (TextUtils.isEmpty(imageName)) {
+            fname = "Image-" + n + ".jpg";
+        } else {
             fname = imageName;
         }
 
         final File file = new File(myDir, fname);
-        if (file.exists ()) file.delete ();
+        if (file.exists()) file.delete();
         try {
             new AsyncTask<Void, Void, Void>() {
                 /**
@@ -129,8 +164,9 @@ public class ImageProcessingUtil {
             e.printStackTrace();
             return "";
         }
-        return  file.getAbsolutePath();
+        return file.getAbsolutePath();
     }
+
     public static String savePicture(final Context context, byte[] imagebyte, String imageName) {
 
         String root = Environment.getExternalStorageDirectory().toString();
@@ -139,57 +175,57 @@ public class ImageProcessingUtil {
         Random generator = new Random();
         int n = 10000;
         n = generator.nextInt(n);
-        String fname="";
-        if(TextUtils.isEmpty(imageName)){
-            fname = "Image-"+ n +".jpg";
-        }else{
+        String fname = "";
+        if (TextUtils.isEmpty(imageName)) {
+            fname = "Image-" + n + ".jpg";
+        } else {
             fname = imageName;
         }
 
         final Bitmap finalBitmap = decodeByteArray(imagebyte, 0, imagebyte.length);
         final File file = new File(myDir, fname);
-        if (file.exists ()) file.delete ();
+        if (file.exists()) file.delete();
         try {
 
-                new AsyncTask<Void, Void, Void>() {
-                    /**
-                     * Override this method to perform a computation on a background thread. The
-                     * specified parameters are the parameters passed to {@link #execute}
-                     * by the caller of this task.
-                     * <p>
-                     * This method can call {@link #publishProgress} to publish updates
-                     * on the UI thread.
-                     *
-                     * @param params The parameters of the task.
-                     * @return A result, defined by the subclass of this task.
-                     * @see #onPreExecute()
-                     * @see #onPostExecute
-                     * @see #publishProgress
-                     */
-                    @Override
-                    protected Void doInBackground(Void... params) {
-                        FileOutputStream out = null;
-                        try {
-                            out = new FileOutputStream(file);
-                            finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
-                            out.flush();
-                            out.close();
-                            new Compressor(context).compressToFile(file);
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-
-                        return null;
+            new AsyncTask<Void, Void, Void>() {
+                /**
+                 * Override this method to perform a computation on a background thread. The
+                 * specified parameters are the parameters passed to {@link #execute}
+                 * by the caller of this task.
+                 * <p>
+                 * This method can call {@link #publishProgress} to publish updates
+                 * on the UI thread.
+                 *
+                 * @param params The parameters of the task.
+                 * @return A result, defined by the subclass of this task.
+                 * @see #onPreExecute()
+                 * @see #onPostExecute
+                 * @see #publishProgress
+                 */
+                @Override
+                protected Void doInBackground(Void... params) {
+                    FileOutputStream out = null;
+                    try {
+                        out = new FileOutputStream(file);
+                        finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+                        out.flush();
+                        out.close();
+                        new Compressor(context).compressToFile(file);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                }.execute();
+
+                    return null;
+                }
+            }.execute();
 
         } catch (Exception e) {
             e.printStackTrace();
             return "";
         }
-        return  file.getAbsolutePath();
+        return file.getAbsolutePath();
     }
 
     public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
@@ -207,13 +243,14 @@ public class ImageProcessingUtil {
         options.inJustDecodeBounds = false;
         return BitmapFactory.decodeResource(res, resId, options);
     }
-    public static void captureImage(Context context){
+
+    public static void captureImage(Context context) {
         try {
             // use standard intent to capture an image
             Intent captureIntent = new Intent(
                     MediaStore.ACTION_IMAGE_CAPTURE);
             // we will handle the returned data in onActivityResult
-            ((Activity)context).startActivityForResult(captureIntent, CAMERA_CAPTURE);
+            ((Activity) context).startActivityForResult(captureIntent, CAMERA_CAPTURE);
         } catch (ActivityNotFoundException anfe) {
             anfe.printStackTrace();
             Toast toast = Toast.makeText(context, "This device doesn't support the crop action!",
@@ -221,6 +258,7 @@ public class ImageProcessingUtil {
             toast.show();
         }
     }
+
     /**
      * this function does the crop operation.
      */
@@ -253,7 +291,8 @@ public class ImageProcessingUtil {
             toast.show();
         }
     }
-//  Bitmap bitmap =
+
+    //  Bitmap bitmap =
     public static Bitmap getImageBitmapfromUri(Context inContext, Uri uri) {
         try {
             return MediaStore.Images.Media.getBitmap(inContext.getContentResolver(), uri);
@@ -262,17 +301,20 @@ public class ImageProcessingUtil {
             return null;
         }
     }
+
     public static Uri getImageUri(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
     }
+
     public static byte[] getBytesFromBitmap(Bitmap picture) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         picture.compress(Bitmap.CompressFormat.JPEG, 100, stream);
         return stream.toByteArray();
     }
+
     public static byte[] getByteFromImagePath(String imagePath) {
         Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
 
@@ -281,10 +323,11 @@ public class ImageProcessingUtil {
         return stream.toByteArray();
 
     }
-    public static byte[] getBytefromDrawable(Context context, Integer Id){
 
-        Drawable drawable =  ContextCompat.getDrawable(context,Id);
-        Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
+    public static byte[] getBytefromDrawable(Context context, Integer Id) {
+
+        Drawable drawable = ContextCompat.getDrawable(context, Id);
+        Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
         return getBytesFromBitmap(bitmap);
     }
 
@@ -323,32 +366,22 @@ public class ImageProcessingUtil {
         return output;
     }
 
-
-    public void sssdsd(Context context , Bitmap bitmap){
-        RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(context.getResources(), bitmap);
-        final float roundPx = (float) bitmap.getWidth() * 0.06f;
-        roundedBitmapDrawable.setCornerRadius(roundPx);
-    }
-
-
     public static Bitmap getBitmapFromBytes(byte[] profileImageByte) {
-        return  BitmapFactory.decodeByteArray(profileImageByte, 0, profileImageByte.length);
+        return BitmapFactory.decodeByteArray(profileImageByte, 0, profileImageByte.length);
     }
 
     /**
-     *
-     * @param input bitmap
+     * @param input   bitmap
      * @param context
      * @return blurry bitmap
      */
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-    public static Bitmap getBlutrryBitMap(Bitmap input, Context context){
-        try
-        {
+    public static Bitmap getBlutrryBitMap(Bitmap input, Context context) {
+        try {
             RenderScript rsScript = RenderScript.create(context);
             Allocation alloc = Allocation.createFromBitmap(rsScript, input);
 
-            ScriptIntrinsicBlur blur = ScriptIntrinsicBlur.create(rsScript,   Element.U8_4(rsScript));
+            ScriptIntrinsicBlur blur = ScriptIntrinsicBlur.create(rsScript, Element.U8_4(rsScript));
             blur.setRadius(99);
             blur.setInput(alloc);
 
@@ -360,17 +393,14 @@ public class ImageProcessingUtil {
 
             rsScript.destroy();
             return result;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             // TODO: handle exception
             return input;
         }
 
     }
 
-
     /**
-     *
      * @param filePath
      * @return
      */
@@ -379,13 +409,19 @@ public class ImageProcessingUtil {
 
         if (image.exists()) {
             BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-            Bitmap bitmap = BitmapFactory.decodeFile(image.getAbsolutePath(),bmOptions);
+            Bitmap bitmap = BitmapFactory.decodeFile(image.getAbsolutePath(), bmOptions);
             if (bitmap == null) return null;
-            bitmap = Bitmap.createScaledBitmap(bitmap,24,24,true);
+            bitmap = Bitmap.createScaledBitmap(bitmap, 24, 24, true);
             return bitmap;
         }
 
         return null;
 
+    }
+
+    public void sssdsd(Context context, Bitmap bitmap) {
+        RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(context.getResources(), bitmap);
+        final float roundPx = (float) bitmap.getWidth() * 0.06f;
+        roundedBitmapDrawable.setCornerRadius(roundPx);
     }
 }

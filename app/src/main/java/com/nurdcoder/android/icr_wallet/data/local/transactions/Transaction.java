@@ -1,3 +1,17 @@
+/*
+ * Copyright (C) 2017 NURDCODER
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://nurdcoder.com/license/apache-v2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License
+ */
 
 package com.nurdcoder.android.icr_wallet.data.local.transactions;
 
@@ -11,8 +25,39 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+/**
+ * ****************************************************************************
+ * * Copyright © 2018 W3 Engineers Ltd., All rights reserved.
+ * *
+ * * Created by:
+ * * Name : ZOARDER AL MUKTADIR
+ * * Date : 10/25/2018
+ * * Email : muktadir@nurdcoder.com
+ * *
+ * * Purpose :
+ * *
+ * * Last Edited by : ZOARDER AL MUKTADIR on 10/25/2018.
+ * * History:
+ * * 1: Create the Class
+ * * 2:
+ * *
+ * * Last Reviewed by : ZOARDER AL MUKTADIR on 10/25/2018.
+ * ****************************************************************************
+ */
+
 public class Transaction implements Parcelable {
 
+    public static final Parcelable.Creator<Transaction> CREATOR = new Parcelable.Creator<Transaction>() {
+        @Override
+        public Transaction createFromParcel(Parcel source) {
+            return new Transaction(source);
+        }
+
+        @Override
+        public Transaction[] newArray(int size) {
+            return new Transaction[size];
+        }
+    };
     @SerializedName("account")
     @Expose
     private String account;
@@ -79,6 +124,20 @@ public class Transaction implements Parcelable {
         this.txid = txid;
         this.time = time;
         this.timereceived = timereceived;
+    }
+
+    protected Transaction(Parcel in) {
+        this.account = in.readString();
+        this.address = in.readString();
+        this.category = in.readString();
+        this.amount = in.readDouble();
+        this.confirmations = in.readLong();
+        this.blockhash = in.readString();
+        this.blockindex = in.readLong();
+        this.blocktime = in.readLong();
+        this.txid = in.readString();
+        this.time = in.readLong();
+        this.timereceived = in.readLong();
     }
 
     public String getAccount() {
@@ -210,30 +269,4 @@ public class Transaction implements Parcelable {
         dest.writeLong(this.time);
         dest.writeLong(this.timereceived);
     }
-
-    protected Transaction(Parcel in) {
-        this.account = in.readString();
-        this.address = in.readString();
-        this.category = in.readString();
-        this.amount = in.readDouble();
-        this.confirmations = in.readLong();
-        this.blockhash = in.readString();
-        this.blockindex = in.readLong();
-        this.blocktime = in.readLong();
-        this.txid = in.readString();
-        this.time = in.readLong();
-        this.timereceived = in.readLong();
-    }
-
-    public static final Parcelable.Creator<Transaction> CREATOR = new Parcelable.Creator<Transaction>() {
-        @Override
-        public Transaction createFromParcel(Parcel source) {
-            return new Transaction(source);
-        }
-
-        @Override
-        public Transaction[] newArray(int size) {
-            return new Transaction[size];
-        }
-    };
 }

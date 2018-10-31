@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2017 NURDCODER
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://nurdcoder.com/license/apache-v2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License
+ */
+
 package com.nurdcoder.android.util.lib;
 
 import android.util.Log;
@@ -16,25 +31,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/*
-* ****************************************************************************
-* * Copyright © 2018 W3 Engineers Ltd., All rights reserved.
-* *
-* * Created by:
-* * Name : Mohd. Asfaq-E-Azam Rifat
-* * Date : 2/1/18
-* * Email : rifat@w3engineers.com
-* *
-* * Purpose : Generic Class for convert any type of model
-* *
-* * Last Edited by : Mohd. Asfaq-E-Azam Rifat on 2/1/18.
-* * History:
-* * 1:
-* * 2:
-* *
-* * Last Reviewed by : Sudipta K Paik on 03/13/18.
-* ****************************************************************************
-*/
+/**
+ * ****************************************************************************
+ * * Copyright © 2018 W3 Engineers Ltd., All rights reserved.
+ * *
+ * * Created by:
+ * * Name : ZOARDER AL MUKTADIR
+ * * Date : 10/25/2018
+ * * Email : muktadir@nurdcoder.com
+ * *
+ * * Purpose :
+ * *
+ * * Last Edited by : ZOARDER AL MUKTADIR on 10/25/2018.
+ * * History:
+ * * 1: Create the Class
+ * * 2:
+ * *
+ * * Last Reviewed by : ZOARDER AL MUKTADIR on 10/25/2018.
+ * ****************************************************************************
+ */
 
 public class GSonHelper {
 
@@ -42,20 +57,23 @@ public class GSonHelper {
     private static Gson sGson = new Gson();
 
     // Private Constructor to avoid creating instance of this class from outside
-    private GSonHelper() {}
+    private GSonHelper() {
+    }
 
     /*------------------Methods to get JSON from different OBJECTS------------------*/
+
     /**
-     * @author Mohd. Asfaq-E-Azam Rifat
-     * @param <T> the 1st type of the desired object
+     * @param <T>              the 1st type of the desired object
      * @param modelClassObject an object of model class
      * @return String the desired json
-     *
+     * <p>
      * i.e: String json = GsonHelper.toJson(modelClassObject);
+     * @author Mohd. Asfaq-E-Azam Rifat
      */
     public static <T> String toJson(T modelClassObject) {
 
-        Type type = new TypeToken<T>() {}.getType();
+        Type type = new TypeToken<T>() {
+        }.getType();
 
         try {
             return sGson.toJson(modelClassObject, type);
@@ -67,16 +85,17 @@ public class GSonHelper {
     }
 
     /**
-     * @author Mohd. Asfaq-E-Azam Rifat
-     * @param <T> the 1st type of the desired object
+     * @param <T>                     the 1st type of the desired object
      * @param listOfModelClassObjects a list of objects of model class
      * @return String the desired json
-     *
+     * <p>
      * i.e: String json = GsonHelper.toJson(listOfModelClassObjects);
+     * @author Mohd. Asfaq-E-Azam Rifat
      */
     public static <T> String toJson(List<T> listOfModelClassObjects) {
 
-        Type type = new TypeToken<List<T>>() {}.getType();
+        Type type = new TypeToken<List<T>>() {
+        }.getType();
 
         try {
             return sGson.toJson(listOfModelClassObjects, type);
@@ -88,17 +107,18 @@ public class GSonHelper {
     }
 
     /**
-     * @author Mohd. Asfaq-E-Azam Rifat
-     * @param <T1> the 1st type of the desired object
-     * @param <T2> the 2nd type of the desired object
+     * @param <T1>                             the 1st type of the desired object
+     * @param <T2>                             the 2nd type of the desired object
      * @param keyValuePairsOfModelClassObjects an map of objects of model class
      * @return String the desired json
-     *
+     * <p>
      * i.e: String json = GsonHelper.toJson(keyValuePairsOfModelClassObjects);
+     * @author Mohd. Asfaq-E-Azam Rifat
      */
     public static <T1, T2> String toJson(Map<T1, T2> keyValuePairsOfModelClassObjects) {
 
-        Type type = new TypeToken<Map<T1, T2>>() {}.getType();
+        Type type = new TypeToken<Map<T1, T2>>() {
+        }.getType();
 
         try {
             return sGson.toJson(keyValuePairsOfModelClassObjects, type);
@@ -110,16 +130,17 @@ public class GSonHelper {
     }
 
     /**
-     * @author Mohd. Asfaq-E-Azam Rifat
-     * @param <T> the type of the desired object
+     * @param <T>                      the type of the desired object
      * @param arrayOfModelClassObjects an array of objects of model class
      * @return String the desired json
-     *
+     * <p>
      * i.e: String json = GsonHelper.toJson(arrayOfModelClassObjects);
+     * @author Mohd. Asfaq-E-Azam Rifat
      */
     public static <T> String toJson(T[] arrayOfModelClassObjects) {
 
-        Type type = new TypeToken<T[]>() {}.getType();
+        Type type = new TypeToken<T[]>() {
+        }.getType();
 
         try {
             return sGson.toJson(arrayOfModelClassObjects, type);
@@ -131,14 +152,15 @@ public class GSonHelper {
     }
 
     /*------------------Methods to get OBJECTS from JSON------------------*/
+
     /**
-     * @author Mohd. Asfaq-E-Azam Rifat
-     * @param <T> the type of the desired object
-     * @param json the string from which the object is to be deserialized
+     * @param <T>        the type of the desired object
+     * @param json       the string from which the object is to be deserialized
      * @param modelClass the specific class of which the object is to be generated
      * @return T an object of the model class
-     *
+     * <p>
      * i.e: ModelClass modelClassObject = GsonHelper.fromJson(json, ModelClass.class);
+     * @author Mohd. Asfaq-E-Azam Rifat
      */
     public static <T> T fromJson(String json, Class<T> modelClass) {
 
@@ -155,11 +177,11 @@ public class GSonHelper {
     }
 
     /**
-     * @author Mohd. Asfaq-E-Azam Rifat
      * @param json the string from which the object is to be deserialized
      * @return JsonObject a json object to be used
-     *
+     * <p>
      * i.e: JsonObject jsonObject = GsonHelper.fromJson(json);
+     * @author Mohd. Asfaq-E-Azam Rifat
      */
     public static JsonObject fromJson(String json) {
 
@@ -173,15 +195,15 @@ public class GSonHelper {
     }
 
     /**
-     * @author Mohd. Asfaq-E-Azam Rifat
-     * @param <T> the type of the desired object
-     * @param json the string from which the object is to be deserialized
+     * @param <T>         the type of the desired object
+     * @param json        the string from which the object is to be deserialized
      * @param desiredType the specific genericized type of source.
      * @return List<T> list of the desired objects
-     *
+     * <p>
      * i.e:
      * List<ModelClass> listOfModelClassObjects
-     *                  = GsonHelper.fromJson(json, new TypeToken<List<ModelClass>>(){}.getType());
+     * = GsonHelper.fromJson(json, new TypeToken<List<ModelClass>>(){}.getType());
+     * @author Mohd. Asfaq-E-Azam Rifat
      */
     public static <T> List<T> fromJson(String json, Type desiredType) {
 

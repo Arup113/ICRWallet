@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2017 NURDCODER
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://nurdcoder.com/license/apache-v2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License
+ */
+
 package com.nurdcoder.android.icr_wallet.data.local.installedapps;
 
 import android.arch.persistence.room.ColumnInfo;
@@ -11,17 +26,40 @@ import com.nurdcoder.android.icr_wallet.data.local.dbstorage.ColumnNames;
 import com.nurdcoder.android.icr_wallet.data.local.dbstorage.TableNames;
 
 /**
- * Created by: Mithun Sarker on 7/30/18 at 3:16 PM.
- * Email: mithun@w3engineers.com
- * Code Responsibility: Entity class for Shared and mesh store apps
- * Last edited by : <NAME> on <DATE>.
- * Last Reviewed by : <NAME> on <DATE>.
- * Copyright (c) 2018, W3 Engineers Ltd. All rights reserved.
+ * ****************************************************************************
+ * * Copyright © 2018 W3 Engineers Ltd., All rights reserved.
+ * *
+ * * Created by:
+ * * Name : ZOARDER AL MUKTADIR
+ * * Date : 10/25/2018
+ * * Email : muktadir@nurdcoder.com
+ * *
+ * * Purpose :
+ * *
+ * * Last Edited by : ZOARDER AL MUKTADIR on 10/25/2018.
+ * * History:
+ * * 1: Create the Class
+ * * 2:
+ * *
+ * * Last Reviewed by : ZOARDER AL MUKTADIR on 10/25/2018.
+ * ****************************************************************************
  */
+
 @Entity(tableName = TableNames.MESH_SHARED_APPS, indices = {@Index(value = {ColumnNames.PACKAGE_NAME}, unique = true)})
 public class SharedAppsEntity extends RoomEntity implements Parcelable {
 
 
+    public static final Parcelable.Creator<SharedAppsEntity> CREATOR = new Parcelable.Creator<SharedAppsEntity>() {
+        @Override
+        public SharedAppsEntity createFromParcel(Parcel source) {
+            return new SharedAppsEntity(source);
+        }
+
+        @Override
+        public SharedAppsEntity[] newArray(int size) {
+            return new SharedAppsEntity[size];
+        }
+    };
     @ColumnInfo(name = ColumnNames.APP_NAME)
     private String appName;
     @ColumnInfo(name = ColumnNames.APPLICATION_ID)
@@ -63,22 +101,10 @@ public class SharedAppsEntity extends RoomEntity implements Parcelable {
     @ColumnInfo(name = ColumnNames.APK_SIZE)
     private long apkSize; // is it icr_wallet apps
 
+
     public SharedAppsEntity() {
 
     }
-
-
-    public static final Parcelable.Creator<SharedAppsEntity> CREATOR = new Parcelable.Creator<SharedAppsEntity>() {
-        @Override
-        public SharedAppsEntity createFromParcel(Parcel source) {
-            return new SharedAppsEntity(source);
-        }
-
-        @Override
-        public SharedAppsEntity[] newArray(int size) {
-            return new SharedAppsEntity[size];
-        }
-    };
 
     protected SharedAppsEntity(Parcel in) {
         this.appName = in.readString();

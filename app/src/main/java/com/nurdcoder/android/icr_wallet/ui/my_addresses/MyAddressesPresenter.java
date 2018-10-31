@@ -1,3 +1,18 @@
+/*
+ * Copyright (C) 2017 NURDCODER
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://nurdcoder.com/license/apache-v2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License
+ */
+
 package com.nurdcoder.android.icr_wallet.ui.my_addresses;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -21,17 +36,17 @@ import java.util.HashMap;
  * *
  * * Created by:
  * * Name : ZOARDER AL MUKTADIR
- * * Date : 8/8/18
- * * Email : muktadir@w3engineers.com
+ * * Date : 10/25/2018
+ * * Email : muktadir@nurdcoder.com
  * *
- * * Purpose : Presenter for Similar Apps.
+ * * Purpose :
  * *
- * * Last Edited by : ZOARDER AL MUKTADIR on 8/8/18.
+ * * Last Edited by : ZOARDER AL MUKTADIR on 10/25/2018.
  * * History:
  * * 1: Create the Class
  * * 2:
  * *
- * * Last Reviewed by : ZOARDER AL MUKTADIR on 8/8/18.
+ * * Last Reviewed by : ZOARDER AL MUKTADIR on 10/25/2018.
  * ****************************************************************************
  */
 
@@ -74,6 +89,6 @@ public class MyAddressesPresenter extends BasePresenter<MyAddressesMvpView> {
                 Constants.Integer.SOCKET_TIMEOUT_MS,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        ICRWalletApp.getInstance().addToRequestQueue(objectRequest);    
+        ICRWalletApp.getInstance().addToRequestQueue(objectRequest);
     }
 }

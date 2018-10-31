@@ -1,12 +1,16 @@
 /*
- *  ****************************************************************************
- *  * Created by : Azizul Islam on 13-Oct-17 at 4:02 PM.
- *  * Email : azizul@w3engineers.com
- *  *
- *  * Last edited by : Azizul Islam on 13-Oct-17.
- *  *
- *  * Last Reviewed by : <Reviewer Name> on <mm/dd/yy>
- *  ****************************************************************************
+ * Copyright (C) 2017 NURDCODER
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://nurdcoder.com/license/apache-v2
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License
  */
 
 package com.nurdcoder.android.icr_wallet.ui.splash;
@@ -24,6 +28,26 @@ import com.nurdcoder.android.icr_wallet.ui.main.MainActivity;
 import com.nurdcoder.android.icr_wallet.ui.sign_in.SignInActivity;
 import com.nurdcoder.android.util.helper.SharedPreferencesManager;
 import com.race604.drawable.wave.WaveDrawable;
+
+/**
+ * ****************************************************************************
+ * * Copyright © 2018 W3 Engineers Ltd., All rights reserved.
+ * *
+ * * Created by:
+ * * Name : ZOARDER AL MUKTADIR
+ * * Date : 10/25/2018
+ * * Email : muktadir@nurdcoder.com
+ * *
+ * * Purpose :
+ * *
+ * * Last Edited by : ZOARDER AL MUKTADIR on 10/25/2018.
+ * * History:
+ * * 1: Create the Class
+ * * 2:
+ * *
+ * * Last Reviewed by : ZOARDER AL MUKTADIR on 10/25/2018.
+ * ****************************************************************************
+ */
 
 public class SplashActivity extends BaseActivity<SplashMvpView, SplashPresenter> implements SplashMvpView {
 
