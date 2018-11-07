@@ -18,8 +18,8 @@
                 android:id="@+id/ib_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/size_8dp"
                 android:layout_marginStart="@dimen/size_8dp"
+                android:layout_marginLeft="@dimen/size_8dp"
                 android:layout_marginTop="@dimen/size_8dp"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/this_is_back_image_button"
@@ -62,7 +62,7 @@
                     android:padding="@dimen/size_15dp">
 
                     <EditText
-                        android:id="@+id/edit_text_email"
+                        android:id="@+id/edit_text_email_address"
                         style="@style/EditTextDefault"
                         android:layout_width="@dimen/size_0dp"
                         android:layout_height="wrap_content"
@@ -77,16 +77,14 @@
                         style="@style/ButtonRoundBlue"
                         android:layout_width="@dimen/size_0dp"
                         android:layout_height="@dimen/size_45dp"
-                        android:layout_marginBottom="@dimen/size_10dp"
                         android:layout_marginTop="@dimen/size_15dp"
+                        android:layout_marginBottom="@dimen/size_10dp"
                         android:text="@string/submit"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/edit_text_email" />
-
+                        app:layout_constraintTop_toBottomOf="@+id/edit_text_email_address" />
                 </android.support.constraint.ConstraintLayout>
-
             </android.support.v7.widget.CardView>
 
             <TextView
@@ -94,17 +92,16 @@
                 style="@style/TextPageHeader"
                 android:layout_width="@dimen/size_0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/size_20dp"
-                android:layout_marginLeft="@dimen/size_20dp"
-                android:layout_marginRight="@dimen/size_20dp"
                 android:layout_marginStart="@dimen/size_20dp"
+                android:layout_marginLeft="@dimen/size_20dp"
                 android:layout_marginTop="@dimen/size_80dp"
+                android:layout_marginEnd="@dimen/size_20dp"
+                android:layout_marginRight="@dimen/size_20dp"
                 android:gravity="center"
                 android:text="@string/please_enter_your_email_for_verification"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ib_back" />
-
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 </layout>

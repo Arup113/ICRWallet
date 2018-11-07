@@ -84,14 +84,14 @@ public class TransferAmountFragment extends BaseFragment<TransferAmountMvpView, 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.button_sign_in:
+            case R.id.button_scan:
                 Intent i = new Intent(getActivity(), ScanActivity.class);
                 startActivityForResult(i, TWO);
                 break;
 
-            case R.id.button_sign_up:
+            case R.id.button_submit:
                 KeyboardUtils.hideSoftInput(getActivity());
-                new Handler(Objects.requireNonNull(getActivity()).getMainLooper()).postDelayed(() -> presenter.sendMoney(mBinding.editTextEmail.getText().toString(), mBinding.editTextPassword.getText().toString()), Constants.Integer.API_DELAY);
+                new Handler(Objects.requireNonNull(getActivity()).getMainLooper()).postDelayed(() -> presenter.sendMoney(mBinding.editTextAddress.getText().toString(), mBinding.editTextAmount.getText().toString()), Constants.Integer.API_DELAY);
                 break;
         }
     }
@@ -106,10 +106,10 @@ public class TransferAmountFragment extends BaseFragment<TransferAmountMvpView, 
                     String[] part = result.split("&");
                     for (int i = 0; i < part.length; i++) {
                         if (part[i].contains("address=")) {
-                            mBinding.editTextEmail.setText(part[0].replaceAll("address=", ""));
+                            mBinding.editTextAddress.setText(part[0].replaceAll("address=", ""));
                         }
                         if (part[i].contains("amount=")) {
-                            mBinding.editTextPassword.setText(part[1].replaceAll("amount=", ""));
+                            mBinding.editTextAmount.setText(part[1].replaceAll("amount=", ""));
                         }
                     }
                 }
@@ -123,8 +123,8 @@ public class TransferAmountFragment extends BaseFragment<TransferAmountMvpView, 
     @Override
     protected void startUI() {
         setClickListener(
-                mBinding.buttonSignIn,
-                mBinding.buttonSignUp
+                mBinding.buttonScan,
+                mBinding.buttonSubmit
         );
     }
 
@@ -142,8 +142,8 @@ public class TransferAmountFragment extends BaseFragment<TransferAmountMvpView, 
     public void onTransferAmountSuccessful(ApiResponse apiResponse) {
         SharedPreferencesManager.setStringSetting(getContext(), PreferenceKey.KEY_USER_TOKEN, apiResponse.getToken());
         Toaster.success(getContext(), apiResponse.getMessage());
-        mBinding.editTextEmail.setText("");
-        mBinding.editTextPassword.setText("");
+        mBinding.editTextAddress.setText("");
+        mBinding.editTextAmount.setText("");
     }
 
     @Override

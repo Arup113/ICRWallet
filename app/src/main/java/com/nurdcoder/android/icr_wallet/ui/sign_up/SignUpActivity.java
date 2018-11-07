@@ -116,21 +116,18 @@ public class SignUpActivity extends BaseActivity<SignUpMvpView, SignUpPresenter>
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_sign_up:
-
                 KeyboardUtils.hideSoftInput(SignUpActivity.this);
                 mProgressDialogHelper = new ProgressDialogHelper(this, "Signing Up...");
                 mProgressDialogHelper.show();
 
                 //validate user input
-                presenter.userInputValidation(mBinding.editTextName.getText().toString().trim(),
-                        mBinding.editTextEmail.getText().toString().trim(),
+                presenter.userInputValidation(mBinding.editTextFullName.getText().toString().trim(),
+                        mBinding.editTextEmailAddress.getText().toString().trim(),
                         mBinding.editTextPassword.getText().toString().trim(),
                         mBinding.editTextConfirmPassword.getText().toString().trim());
-
                 break;
 
             case R.id.iv_profile:
-
                 CropImage.activity()
                         .setGuidelines(CropImageView.Guidelines.ON_TOUCH)
                         .setActivityTitle(getString(R.string.app_name))
@@ -140,7 +137,6 @@ public class SignUpActivity extends BaseActivity<SignUpMvpView, SignUpPresenter>
                         .setAspectRatio(5, 5)
                         .setOutputCompressQuality(30)
                         .start(this);
-
                 break;
 
             case R.id.ib_back:
@@ -187,8 +183,8 @@ public class SignUpActivity extends BaseActivity<SignUpMvpView, SignUpPresenter>
         if (isValid) {
             //initially we are not verifying email, after the completion of design we will verifyCaptcha
             presenter.signUp(
-                    mBinding.editTextName.getText().toString(),
-                    mBinding.editTextEmail.getText().toString(),
+                    mBinding.editTextFullName.getText().toString(),
+                    mBinding.editTextEmailAddress.getText().toString(),
                     mBinding.editTextPassword.getText().toString(),
                     mProfileImageUri
             );

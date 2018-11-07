@@ -106,7 +106,7 @@ public class SignInActivity extends BaseActivity<SignInMvpView, SignInPresenter>
         progressDialogHelper = new ProgressDialogHelper(this, "Logging In...");
 
         // Setting right drawable
-        setRightDrawable(mBinding.editTextEmail, R.drawable.ic_mail);
+        setRightDrawable(mBinding.editTextEmailAddress, R.drawable.ic_mail);
         setRightDrawable(mBinding.editTextPassword, R.drawable.ic_eye_closed);
 
         mBinding.editTextPassword.setOnTouchListener((v, event) -> {
@@ -166,7 +166,7 @@ public class SignInActivity extends BaseActivity<SignInMvpView, SignInPresenter>
         switch (view.getId()) {
             case R.id.button_sign_in:
                 KeyboardUtils.hideSoftInput(SignInActivity.this);
-                presenter.validateUserInput(mBinding.editTextEmail.getText().toString(), mBinding.editTextPassword.getText().toString());
+                presenter.validateUserInput(mBinding.editTextEmailAddress.getText().toString(), mBinding.editTextPassword.getText().toString());
                 break;
 
             case R.id.button_sign_up:
@@ -199,7 +199,7 @@ public class SignInActivity extends BaseActivity<SignInMvpView, SignInPresenter>
     public void isValidUserInput(boolean isValid, String message) {
         if (isValid) {
             progressDialogHelper.show();
-            presenter.signIn(mBinding.editTextEmail.getText().toString(), mBinding.editTextPassword.getText().toString());
+            presenter.signIn(mBinding.editTextEmailAddress.getText().toString(), mBinding.editTextPassword.getText().toString());
         } else {
             Toaster.error(this, message);
         }

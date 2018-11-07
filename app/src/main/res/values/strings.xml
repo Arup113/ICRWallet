@@ -29,7 +29,6 @@
     <string name="parse_production_url">http://parsestore-staging.wave.io/parse</string>
     <string name="parse_test_url">http://192.168.1.8:5100/parse</string>
     <string name="parse_development_url">https://icr_wallet.herokuapp.com/parse</string>
-    <string name="submit">Submit</string>
     <string name="please_enter_your_email_for_verification">Please enter your email for verification</string>
     <string name="email_verified_now_login">Email is verified, now you can login</string>
     <string name="email_not_verified">Email is not verified, try again</string>
@@ -85,7 +84,10 @@
     <string name="edit_address_header">Edit Label for Existing Address</string>
     <string name="detail_address_header">My Address</string>
     <string name="Label">Label</string>
-    <string name="address">Address</string>
     <string name="my_key">MY PRIVATE KEY</string>
     <string name="update">UPDATE</string>
+    <string name="submit">Submit</string>
+    <string name="scan">Scan</string>
+    <string name="amount">Amount</string>
+    <string name="address">Address</string>
 </resources>

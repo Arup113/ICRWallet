@@ -80,9 +80,7 @@ public class EmailVerificationActivity extends BaseActivity<EmailVerificationMVP
 
     @Override
     protected void startUI() {
-
         mBinding = (ActivityEmailVerificationBinding) getViewDataBinding();
-
         setClickListener(mBinding.buttonSubmit, mBinding.ibBack);
     }
 
@@ -107,7 +105,7 @@ public class EmailVerificationActivity extends BaseActivity<EmailVerificationMVP
         switch (view.getId()) {
             case R.id.button_submit:
                 KeyboardUtils.hideSoftInput(EmailVerificationActivity.this);
-                presenter.verifyCaptcha(mBinding.editTextEmail.getText().toString());
+                presenter.verifyCaptcha(mBinding.editTextEmailAddress.getText().toString());
                 break;
 
             case R.id.ib_back:
@@ -120,11 +118,10 @@ public class EmailVerificationActivity extends BaseActivity<EmailVerificationMVP
     public void onCaptchaVerified(boolean isSuccess, String message) {
         if (isSuccess) {
 //            Toaster.success(message);
-            presenter.resetPassword(mBinding.editTextEmail.getText().toString());
+            presenter.resetPassword(mBinding.editTextEmailAddress.getText().toString());
         } else {
             Toaster.error(this, message);
         }
-
     }
 
     @Override

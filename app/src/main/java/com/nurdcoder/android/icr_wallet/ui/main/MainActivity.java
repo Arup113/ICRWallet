@@ -86,7 +86,7 @@ public class MainActivity extends BaseActivity<MainMvpView, MainPresenter> imple
     }
 
     private void setUpToolbar() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         if (mToolbar != null) {
             setSupportActionBar(mToolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -165,7 +165,7 @@ public class MainActivity extends BaseActivity<MainMvpView, MainPresenter> imple
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -204,12 +204,12 @@ public class MainActivity extends BaseActivity<MainMvpView, MainPresenter> imple
                 break;
             case R.id.nav_log_out:
                 SharedPreferencesManager.setBooleanSetting(this, PreferenceKey.KEY_IS_LOGGED_IN, false);
-                SignInActivity.runActivity(this, "");
+                SignInActivity.runActivity(this, null);
                 finish();
                 break;
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
