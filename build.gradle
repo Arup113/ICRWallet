@@ -45,7 +45,7 @@ task wrapper(type: Wrapper) {
 // Define versions in a single place
 ext {
     VERSION_CODE = 1
-    VERSION_NAME = '0.0.6'
+    VERSION_NAME = '0.0.7'
 
     // Sdk and tools
     MIN_SDK_VERSION = 19
